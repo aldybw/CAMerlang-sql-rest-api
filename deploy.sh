@@ -3,7 +3,7 @@ CLOUD_RUN_SERVICE=camerlang-api-service
 INSTANCE_CONNECTION_NAME=rest-api-wiht-mysql:us-central1:camerlang-rest-api-1
 DB_USERNAME=root
 DB_PASSWORD=qwerty123
-DB_NAME=camerlang-db
+DB_NAME=camerlang_db
 
 gcloud builds submit --tag gcr.io/$GOOGLE_PROJECT_ID/$CLOUD_RUN_SERVICE \
   --project=$GOOGLE_PROJECT_ID

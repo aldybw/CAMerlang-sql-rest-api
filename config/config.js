@@ -6,6 +6,7 @@ const {
   DB_NAME,
   DB_HOSTNAME,
   INSTANCE_CONNECTION_NAME,
+  DB_PORT,
 } = process.env;
 
 module.exports = {
@@ -14,6 +15,7 @@ module.exports = {
     password: DB_PASSWORD,
     database: DB_NAME,
     host: INSTANCE_CONNECTION_NAME,
+    port: DB_PORT,
     dialect: "mysql",
   },
   test: {
@@ -21,6 +23,7 @@ module.exports = {
     password: DB_PASSWORD,
     database: DB_NAME,
     host: INSTANCE_CONNECTION_NAME,
+    port: DB_PORT,
     dialect: "mysql",
   },
   production: {
@@ -28,6 +31,7 @@ module.exports = {
     password: DB_PASSWORD,
     database: DB_NAME,
     host: INSTANCE_CONNECTION_NAME,
+    port: DB_PORT,
     dialect: "mysql",
   },
 };
