@@ -1,4 +1,4 @@
-const { Article } = require("../../../models/");
+const { article } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const articleIds = req.query.article_ids || [];
@@ -38,7 +38,7 @@ module.exports = async (req, res) => {
     };
   }
 
-  const articles = await Article.findAll(sqlOptions);
+  const articles = await article.findAll(sqlOptions);
 
   if (articles.length === 0) {
     return res.json({

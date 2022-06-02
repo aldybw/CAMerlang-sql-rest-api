@@ -3,7 +3,7 @@ const base64Img = require("base64-img");
 const Validator = require("fastest-validator");
 const v = new Validator();
 
-const { Article } = require("../../../models/");
+const { article } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const schema = {
@@ -63,7 +63,7 @@ module.exports = async (req, res) => {
         content: req.body.content,
       };
 
-      const createdArticle = await Article.create(data);
+      const createdArticle = await article.create(data);
 
       return res.json({
         status: "success",

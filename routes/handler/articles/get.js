@@ -1,9 +1,9 @@
-const { Article } = require("../../../models/");
+const { article } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const id = req.params.id;
 
-  const article = await Article.findByPk(id, {
+  const singleArticle = await article.findByPk(id, {
     attributes: [
       "id",
       "thumbnail",
@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
     ],
   });
 
-  if (!article) {
+  if (!singleArticle) {
     return res.status(404).json({
       status: "error",
       message: "article not found",
@@ -22,12 +22,12 @@ module.exports = async (req, res) => {
   }
 
   const specifiedArticle = {
-    id: article.id,
-    thumbnail: `${req.get("host")}/${article.thumbnail}`,
-    title: article.title,
-    type: article.type,
-    read_duration: article.read_duration,
-    content: article.content,
+    id: singleArticle.id,
+    thumbnail: `${req.get("host")}/${singleArticle.thumbnail}`,
+    title: singleArticle.title,
+    type: singleArticle.type,
+    read_duration: singleArticle.read_duration,
+    content: singleArticle.content,
   };
 
   return res.json({
