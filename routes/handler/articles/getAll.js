@@ -40,6 +40,13 @@ module.exports = async (req, res) => {
 
   const articles = await Article.findAll(sqlOptions);
 
+  if (articles.length === 0) {
+    return res.json({
+      status: "success",
+      message: "There is no articles data",
+    });
+  }
+
   const mappedArticle = articles.map((a) => {
     a.id = a.id;
     a.thumbnail = `${req.get("host")}/${a.thumbnail}`;
