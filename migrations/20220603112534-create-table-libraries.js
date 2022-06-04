@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     // logic for transforming into the new state
-    return queryInterface.createTable("articles", {
+    return queryInterface.createTable("libraries", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -14,16 +14,23 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      title: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      type: {
-        type: Sequelize.ENUM("tips", "news", "people", "list", "review"),
+      body_type: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
-      read_duration: {
-        type: Sequelize.STRING,
+      problem_severity: {
+        type: Sequelize.ENUM(
+          "light",
+          "moderate",
+          "serious",
+          "severe",
+          "critical",
+          "various"
+        ),
         allowNull: false,
       },
       content_header: {
@@ -46,6 +53,6 @@ module.exports = {
   },
   down: (queryInterface, Sequelize) => {
     // logic for reverting the changes
-    return queryInterface.dropTable("articles");
+    return queryInterface.dropTable("libraries");
   },
 };

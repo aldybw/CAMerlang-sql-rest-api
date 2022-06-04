@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Article = sequelize.define("article", {
+  const Library = sequelize.define("library", {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -10,17 +10,25 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    title: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    type: {
-      type: DataTypes.ENUM("tips", "news", "people", "list", "review"),
+    bodyType: {
+      field: "body_type",
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    readDuration: {
-      field: "read_duration",
-      type: DataTypes.STRING,
+    problemSeverity: {
+      field: "problem_severity",
+      type: DataTypes.ENUM(
+        "light",
+        "moderate",
+        "serious",
+        "severe",
+        "critical",
+        "various"
+      ),
       allowNull: false,
     },
     contentHeader: {
@@ -44,5 +52,5 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  return Article;
+  return Library;
 };

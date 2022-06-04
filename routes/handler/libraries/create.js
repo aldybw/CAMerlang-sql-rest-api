@@ -3,7 +3,7 @@ const base64Img = require("base64-img");
 const Validator = require("fastest-validator");
 const v = new Validator();
 
-const { article } = require("../../../models/");
+const { library } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const schema = {
@@ -11,19 +11,19 @@ module.exports = async (req, res) => {
       type: "string",
       empty: "false",
     },
-    title: {
+    name: {
       type: "string",
       empty: "false",
     },
-    type: {
+    bodyType: {
+      type: "string",
+      empty: "false",
+    },
+    problemSeverity: {
       type: "enum",
-      values: ["tips", "news", "people", "list", "review"],
+      values: ["light", "moderate", "serious", "severe", "critical", "various"],
     },
-    read_duration: {
-      type: "string",
-      empty: "false",
-    },
-    content_header: {
+    contentHeader: {
       type: "string",
       empty: "false",
     },
@@ -50,7 +50,7 @@ module.exports = async (req, res) => {
 
   base64Img.img(
     thumbnail,
-    "./public/images/thumbnails",
+    "./public/images/thumbnails/libraries",
     Date.now(),
     async (err, filepath) => {
       if (err) {
@@ -60,26 +60,28 @@ module.exports = async (req, res) => {
       const filename = filepath.split("\\").pop().split("/").pop();
 
       const data = {
-        thumbnail: `images/thumbnails/${filename}`,
-        title: req.body.title,
-        type: req.body.type,
-        read_duration: req.body.read_duration,
-        content_header: req.body.content,
+        thumbnail: `images/thumbnails/libraries/${filename}`,
+        name: req.body.name,
+        bodyType: req.body.bodyType,
+        problemSeverity: req.body.problemSeverity,
+        contentHeader: req.body.contentHeader,
         content: req.body.content,
       };
 
-      const createdArticle = await article.create(data);
+      const createdLibrary = await library.create(data);
 
       return res.json({
         status: "success",
         data: {
-          id: createdArticle.id,
-          thumbnail: `${req.get("host")}/images/thumbnails/${filename}`,
-          title: createdArticle.title,
-          type: createdArticle.type,
-          read_duration: createdArticle.read_duration,
-          content_header: createdArticle.content_header,
-          content: createdArticle.content,
+          id: createdLibrary.id,
+          thumbnail: `images/thumbnails/libraries/${filename}`,
+          name: createdLibrary.name,
+          body_type: createdLibrary.bodyType,
+          problem_severity: createdLibrary.problemSeverity,
+          content_header: createdLibrary.contentHeader,
+          content: createdLibrary.content,
+          created_at: createdLibrary.createdAt,
+          updated_at: createdLibrary.updatedAt,
         },
       });
     }

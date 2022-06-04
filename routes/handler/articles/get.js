@@ -9,9 +9,11 @@ module.exports = async (req, res) => {
       "thumbnail",
       "title",
       "type",
-      "read_duration",
-      "content_header",
+      "readDuration",
+      "contentHeader",
       "content",
+      "createdAt",
+      "updatedAt",
     ],
   });
 
@@ -27,9 +29,11 @@ module.exports = async (req, res) => {
     thumbnail: `${req.get("host")}/${getArticle.thumbnail}`,
     title: getArticle.title,
     type: getArticle.type,
-    read_duration: getArticle.read_duration,
-    content_header: getArticle.content_header,
+    read_duration: getArticle.readDuration,
+    content_header: getArticle.contentHeader,
     content: getArticle.content,
+    created_at: getArticle.createdAt,
+    updated_at: getArticle.updatedAt,
   };
 
   return res.json({

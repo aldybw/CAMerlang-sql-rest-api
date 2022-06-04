@@ -1,10 +1,10 @@
 const { article } = require("../../../models/");
 
 module.exports = async (req, res) => {
-  const articleIds = req.query.article_ids || [];
-  const articleTitles = req.query.article_titles || [];
-  const articleTypes = req.query.article_types || [];
-  const articleReadDurations = req.query.article_read_durations || [];
+  const articleIds = req.query.articleIds || [];
+  const articleTitles = req.query.articleTitles || [];
+  const articleTypes = req.query.articleTypes || [];
+  const articleReadDurations = req.query.articleReadDurations || [];
 
   const sqlOptions = {
     attributes: [
@@ -12,9 +12,11 @@ module.exports = async (req, res) => {
       "thumbnail",
       "title",
       "type",
-      "read_duration",
-      "content_header",
+      "readDuration",
+      "contentHeader",
       "content",
+      "createdAt",
+      "updatedAt",
     ],
   };
 
@@ -35,7 +37,7 @@ module.exports = async (req, res) => {
   }
   if (articleReadDurations.length) {
     sqlOptions.where = {
-      read_duration: articleReadDurations,
+      readDuration: articleReadDurations,
     };
   }
 
@@ -49,13 +51,17 @@ module.exports = async (req, res) => {
   }
 
   const mappedArticle = getAllArticles.map((a) => {
-    a.id = a.id;
-    a.thumbnail = `${req.get("host")}/${a.thumbnail}`;
-    a.title = a.title;
-    a.type = a.type;
-    a.read_duration = a.read_duration;
-    a.content_header = a.content_header;
-    a.content = a.content;
+    a = {
+      id: a.id,
+      thumbnail: `${req.get("host")}/${a.thumbnail}`,
+      title: a.title,
+      type: a.type,
+      read_duration: a.readDuration,
+      content_header: a.contentHeader,
+      content: a.content,
+      created_at: a.createdAt,
+      updated_at: a.updatedAt,
+    };
     return a;
   });
 

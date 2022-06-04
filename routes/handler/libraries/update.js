@@ -4,7 +4,7 @@ const fs = require("fs");
 const Validator = require("fastest-validator");
 const v = new Validator();
 
-const { article } = require("../../../models/");
+const { library } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const schema = {
@@ -12,19 +12,19 @@ module.exports = async (req, res) => {
       type: "string",
       optional: true,
     },
-    title: {
+    name: {
       type: "string",
       empty: "false",
     },
-    type: {
+    bodyType: {
+      type: "string",
+      empty: "false",
+    },
+    problemSeverity: {
       type: "enum",
-      values: ["tips", "news", "people", "list", "review"],
+      values: ["light", "moderate", "serious", "severe", "critical", "various"],
     },
-    read_duration: {
-      type: "string",
-      empty: "false",
-    },
-    content_header: {
+    contentHeader: {
       type: "string",
       empty: "false",
     },
@@ -44,39 +44,42 @@ module.exports = async (req, res) => {
   }
 
   const id = req.params.id;
-  const getArticle = await article.findByPk(id);
-  if (!getArticle) {
+  const getLibrary = await library.findByPk(id);
+  if (!getLibrary) {
     return res.status(404).json({
       status: "error",
-      message: "article not found",
+      message: "library not found",
     });
   }
 
   const thumbnail = req.body.thumbnail;
 
   if (!thumbnail) {
-    const { title, type, read_duration, content_header, content } = req.body;
-    await getArticle.update({
-      title,
-      type,
-      read_duration,
-      content_header,
+    const { name, bodyType, problemSeverity, contentHeader, content } =
+      req.body;
+    const updatedLibrary = await getLibrary.update({
+      name,
+      bodyType,
+      problemSeverity,
+      contentHeader,
       content,
     });
     return res.json({
       status: "success",
       data: {
-        id: getArticle.id,
-        thumbnail: `${req.get("host")}/${getArticle.thumbnail}`,
-        title,
-        type,
-        read_duration,
-        content_header,
+        id: updatedLibrary.id,
+        thumbnail: `${req.get("host")}/${updatedLibrary.thumbnail}`,
+        name,
+        body_type: updatedLibrary.bodyType,
+        problem_severity: updatedLibrary.problemSeverity,
+        content_header: updatedLibrary.contentHeader,
         content,
+        created_at: updatedLibrary.createdAt,
+        updated_at: updatedLibrary.updatedAt,
       },
     });
   } else {
-    fs.unlink(`./public/${getArticle.thumbnail}`, async (err) => {
+    fs.unlink(`./public/${getLibrary.thumbnail}`, async (err) => {
       if (err) {
         return res.status(400).json({ status: "error", message: err.message });
       }
@@ -90,7 +93,7 @@ module.exports = async (req, res) => {
 
     base64Img.img(
       thumbnail,
-      "./public/images/thumbnails",
+      "./public/images/thumbnails/libraries",
       Date.now(),
       async (err, filepath) => {
         if (err) {
@@ -101,27 +104,29 @@ module.exports = async (req, res) => {
 
         const filename = filepath.split("\\").pop().split("/").pop();
 
-        const { title, type, read_duration, content_header, content } =
+        const { name, bodyType, problemSeverity, contentHeader, content } =
           req.body;
-        await getArticle.update({
-          thumbnail: `images/thumbnails/${filename}`,
-          title,
-          type,
-          read_duration,
-          content_header,
+        const updatedLibrary = await getLibrary.update({
+          thumbnail: `images/thumbnails/libraries/${filename}`,
+          name,
+          bodyType,
+          problemSeverity,
+          contentHeader,
           content,
         });
 
         return res.json({
           status: "success",
           data: {
-            id: getArticle.id,
-            thumbnail: `${req.get("host")}/images/thumbnails/${filename}`,
-            title,
-            type,
-            read_duration,
-            content_header,
+            id: updatedLibrary.id,
+            thumbnail: `${req.get("host")}/${updatedLibrary.thumbnail}`,
+            name,
+            body_type: updatedLibrary.bodyType,
+            problem_severity: updatedLibrary.problemSeverity,
+            content_header: updatedLibrary.contentHeader,
             content,
+            created_at: updatedLibrary.createdAt,
+            updated_at: updatedLibrary.updatedAt,
           },
         });
       }

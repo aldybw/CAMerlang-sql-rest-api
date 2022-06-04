@@ -90,7 +90,7 @@ module.exports = async (req, res) => {
 
     base64Img.img(
       thumbnail,
-      "./public/images/thumbnails",
+      "./public/images/thumbnails/articles",
       Date.now(),
       async (err, filepath) => {
         if (err) {
@@ -104,7 +104,7 @@ module.exports = async (req, res) => {
         const { title, type, read_duration, content_header, content } =
           req.body;
         await getArticle.update({
-          thumbnail: `images/thumbnails/${filename}`,
+          thumbnail: `images/thumbnails/articles/${filename}`,
           title,
           type,
           read_duration,
@@ -116,7 +116,9 @@ module.exports = async (req, res) => {
           status: "success",
           data: {
             id: getArticle.id,
-            thumbnail: `${req.get("host")}/images/thumbnails/${filename}`,
+            thumbnail: `${req.get(
+              "host"
+            )}/images/thumbnails/articles/${filename}`,
             title,
             type,
             read_duration,

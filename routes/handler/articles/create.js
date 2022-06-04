@@ -19,11 +19,11 @@ module.exports = async (req, res) => {
       type: "enum",
       values: ["tips", "news", "people", "list", "review"],
     },
-    read_duration: {
+    readDuration: {
       type: "string",
       empty: "false",
     },
-    content_header: {
+    contentHeader: {
       type: "string",
       empty: "false",
     },
@@ -50,7 +50,7 @@ module.exports = async (req, res) => {
 
   base64Img.img(
     thumbnail,
-    "./public/images/thumbnails",
+    "./public/images/thumbnails/articles",
     Date.now(),
     async (err, filepath) => {
       if (err) {
@@ -60,11 +60,11 @@ module.exports = async (req, res) => {
       const filename = filepath.split("\\").pop().split("/").pop();
 
       const data = {
-        thumbnail: `images/thumbnails/${filename}`,
+        thumbnail: `images/thumbnails/articles/${filename}`,
         title: req.body.title,
         type: req.body.type,
-        read_duration: req.body.read_duration,
-        content_header: req.body.content,
+        readDuration: req.body.readDuration,
+        contentHeader: req.body.contentHeader,
         content: req.body.content,
       };
 
@@ -74,12 +74,16 @@ module.exports = async (req, res) => {
         status: "success",
         data: {
           id: createdArticle.id,
-          thumbnail: `${req.get("host")}/images/thumbnails/${filename}`,
+          thumbnail: `${req.get(
+            "host"
+          )}/images/thumbnails/createdArticles/${filename}`,
           title: createdArticle.title,
           type: createdArticle.type,
-          read_duration: createdArticle.read_duration,
-          content_header: createdArticle.content_header,
+          read_duration: createdArticle.readDuration,
+          content_header: createdArticle.contentHeader,
           content: createdArticle.content,
+          created_at: createdArticle.createdAt,
+          updated_at: createdArticle.updatedAt,
         },
       });
     }

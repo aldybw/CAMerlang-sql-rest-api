@@ -1,27 +1,27 @@
 const fs = require("fs");
-const { article } = require("../../../models/");
+const { library } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const id = req.params.id;
 
-  const getArticle = await article.findByPk(id);
+  const getLibrary = await library.findByPk(id);
 
-  if (!getArticle) {
+  if (!getLibrary) {
     return res
       .status(404)
-      .json({ status: "error", message: "article not found" });
+      .json({ status: "error", message: "library not found" });
   }
 
-  fs.unlink(`./public/${getArticle.thumbnail}`, async (err) => {
+  fs.unlink(`./public/${getLibrary.thumbnail}`, async (err) => {
     if (err) {
       return res.status(400).json({ status: "error", message: err.message });
     }
 
-    await getArticle.destroy();
+    await getLibrary.destroy();
 
     return res.json({
       status: "success",
-      message: "article deleted",
+      message: "library deleted",
     });
   });
 };

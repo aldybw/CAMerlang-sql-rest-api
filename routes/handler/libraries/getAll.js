@@ -1,66 +1,72 @@
-const { article } = require("../../../models/");
+const { library } = require("../../../models/");
 
 module.exports = async (req, res) => {
-  const articleIds = req.query.article_ids || [];
-  const articleTitles = req.query.article_titles || [];
-  const articleTypes = req.query.article_types || [];
-  const articleReadDurations = req.query.article_read_durations || [];
+  const libraryIds = req.query.libraryIds || [];
+  const libraryNames = req.query.libraryNames || [];
+  const libraryBodyTypes = req.query.libraryBodyTypes || [];
+  const libraryProblemSeverity = req.query.libraryProblemSeverity || [];
 
   const sqlOptions = {
     attributes: [
       "id",
       "thumbnail",
-      "title",
-      "type",
-      "read_duration",
-      "content_header",
+      "name",
+      "bodyType",
+      "problemSeverity",
+      "contentHeader",
       "content",
+      "createdAt",
+      "updatedAt",
     ],
   };
 
-  if (articleIds.length) {
+  if (libraryIds.length) {
     sqlOptions.where = {
-      id: articleIds,
+      id: libraryIds,
     };
   }
-  if (articleTitles.length) {
+  if (libraryNames.length) {
     sqlOptions.where = {
-      title: articleTitles,
+      name: libraryNames,
     };
   }
-  if (articleTypes.length) {
+  if (libraryBodyTypes.length) {
     sqlOptions.where = {
-      type: articleTypes,
+      bodyType: libraryBodyTypes,
     };
   }
-  if (articleReadDurations.length) {
+  if (libraryProblemSeverity.length) {
     sqlOptions.where = {
-      read_duration: articleReadDurations,
+      problemSeverity: libraryProblemSeverity,
     };
   }
 
-  const getAllArticles = await article.findAll(sqlOptions);
+  const getAllLibraries = await library.findAll(sqlOptions);
 
-  if (getAllArticles.length === 0) {
+  if (getAllLibraries.length === 0) {
     return res.json({
       status: "success",
-      message: "There is no articles data",
+      message: "There is no libraries data",
     });
   }
 
-  const mappedArticle = getAllArticles.map((a) => {
-    a.id = a.id;
-    a.thumbnail = `${req.get("host")}/${a.thumbnail}`;
-    a.title = a.title;
-    a.type = a.type;
-    a.read_duration = a.read_duration;
-    a.content_header = a.content_header;
-    a.content = a.content;
-    return a;
+  const mappedLibrary = getAllLibraries.map((l) => {
+    l = {
+      id: l.id,
+      thumbnail: `${req.get("host")}/${l.thumbnail}`,
+      name: l.name,
+      body_type: l.bodyType,
+      problem_severity: l.problemSeverity,
+      content_header: l.contentHeader,
+      content: l.content,
+      created_at: l.createdAt,
+      updated_at: l.updatedAt,
+    };
+    return l;
   });
 
   return res.json({
     status: "success",
-    data: mappedArticle,
+    data: mappedLibrary,
   });
 };
