@@ -22,4 +22,10 @@ app.use("/", indexRouter);
 app.use("/articles", articlesRouter);
 app.use("/libraries", librariesRouter);
 
+// Swagger API
+const swaggerUi = require('swagger-ui-express');
+const apiDocs = require('./apidocs.json');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiDocs));
+// End Swagger
+
 module.exports = app;
