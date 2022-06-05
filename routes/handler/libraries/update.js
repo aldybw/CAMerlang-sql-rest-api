@@ -93,7 +93,7 @@ module.exports = async (req, res) => {
 
     base64Img.img(
       thumbnail,
-      "./public/images/thumbnails/libraries",
+      "./public/images/libraries/thumbnails",
       Date.now(),
       async (err, filepath) => {
         if (err) {
@@ -107,7 +107,7 @@ module.exports = async (req, res) => {
         const { name, bodyType, problemSeverity, contentHeader, content } =
           req.body;
         const updatedLibrary = await getLibrary.update({
-          thumbnail: `images/thumbnails/libraries/${filename}`,
+          thumbnail: `images/libraries/thumbnails/${filename}`,
           name,
           bodyType,
           problemSeverity,

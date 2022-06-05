@@ -50,7 +50,7 @@ module.exports = async (req, res) => {
 
   base64Img.img(
     thumbnail,
-    "./public/images/thumbnails/libraries",
+    "./public/images/libraries/thumbnails",
     Date.now(),
     async (err, filepath) => {
       if (err) {
@@ -60,7 +60,7 @@ module.exports = async (req, res) => {
       const filename = filepath.split("\\").pop().split("/").pop();
 
       const data = {
-        thumbnail: `images/thumbnails/libraries/${filename}`,
+        thumbnail: `images/libraries/thumbnails/${filename}`,
         name: req.body.name,
         bodyType: req.body.bodyType,
         problemSeverity: req.body.problemSeverity,
@@ -74,7 +74,9 @@ module.exports = async (req, res) => {
         status: "success",
         data: {
           id: createdLibrary.id,
-          thumbnail: `images/thumbnails/libraries/${filename}`,
+          thumbnail: `${req.get(
+            "host"
+          )}/images/libraries/thumbnails/${filename}`,
           name: createdLibrary.name,
           body_type: createdLibrary.bodyType,
           problem_severity: createdLibrary.problemSeverity,

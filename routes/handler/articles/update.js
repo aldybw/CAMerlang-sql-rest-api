@@ -20,11 +20,11 @@ module.exports = async (req, res) => {
       type: "enum",
       values: ["tips", "news", "people", "list", "review"],
     },
-    read_duration: {
+    readDuration: {
       type: "string",
       empty: "false",
     },
-    content_header: {
+    contentHeader: {
       type: "string",
       empty: "false",
     },
@@ -55,23 +55,23 @@ module.exports = async (req, res) => {
   const thumbnail = req.body.thumbnail;
 
   if (!thumbnail) {
-    const { title, type, read_duration, content_header, content } = req.body;
-    await getArticle.update({
+    const { title, type, readDuration, contentHeader, content } = req.body;
+    const updatedArticle = await getArticle.update({
       title,
       type,
-      read_duration,
-      content_header,
+      readDuration,
+      contentHeader,
       content,
     });
     return res.json({
       status: "success",
       data: {
-        id: getArticle.id,
-        thumbnail: `${req.get("host")}/${getArticle.thumbnail}`,
+        id: updatedArticle.id,
+        thumbnail: `${req.get("host")}/${updatedArticle.thumbnail}`,
         title,
         type,
-        read_duration,
-        content_header,
+        read_duration: updatedArticle.readDuration,
+        contentHeader: updatedArticle.contentHeader,
         content,
       },
     });
@@ -90,7 +90,7 @@ module.exports = async (req, res) => {
 
     base64Img.img(
       thumbnail,
-      "./public/images/thumbnails/articles",
+      "./public/images/articles/thumbnails",
       Date.now(),
       async (err, filepath) => {
         if (err) {
@@ -101,14 +101,14 @@ module.exports = async (req, res) => {
 
         const filename = filepath.split("\\").pop().split("/").pop();
 
-        const { title, type, read_duration, content_header, content } =
-          req.body;
-        await getArticle.update({
-          thumbnail: `images/thumbnails/articles/${filename}`,
+        const { title, type, readDuration, contentHeader, content } = req.body;
+
+        const updatedArticle = await getArticle.update({
+          thumbnail: `images/articles/thumbnails/${filename}`,
           title,
           type,
-          read_duration,
-          content_header,
+          readDuration,
+          contentHeader,
           content,
         });
 
@@ -118,11 +118,11 @@ module.exports = async (req, res) => {
             id: getArticle.id,
             thumbnail: `${req.get(
               "host"
-            )}/images/thumbnails/articles/${filename}`,
+            )}/images/articles/thumbnails/${filename}`,
             title,
             type,
-            read_duration,
-            content_header,
+            read_duration: updatedArticle.readDuration,
+            contentHeader: updatedArticle.contentHeader,
             content,
           },
         });

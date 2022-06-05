@@ -8,6 +8,7 @@ const logger = require("morgan");
 const indexRouter = require("./routes/index");
 const articlesRouter = require("./routes/articles");
 const librariesRouter = require("./routes/libraries");
+const skincareProductsRouter = require("./routes/skincare_products");
 
 const app = express();
 
@@ -21,11 +22,12 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/articles", articlesRouter);
 app.use("/libraries", librariesRouter);
+app.use("/skincare_products", skincareProductsRouter);
 
 // Swagger API
-const swaggerUi = require('swagger-ui-express');
-const apiDocs = require('./apidocs.json');
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiDocs));
+const swaggerUi = require("swagger-ui-express");
+const apiDocs = require("./apidocs.json");
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(apiDocs));
 // End Swagger
 
 module.exports = app;
