@@ -54,12 +54,8 @@
                             "schema":{
                                 "type":"object",
                                 "properties": {
-                                    "id":{
-                                        "type":"string"
-                                    },
                                     "thumbnail":{
-                                        "type":"string",
-                                        "format": "binary"
+                                        "type":"string"
                                     },
                                     "title":{
                                         "type":"string"
@@ -67,7 +63,10 @@
                                     "type":{
                                         "type":"string"
                                     },
-                                    "read_duration":{
+                                    "readDuration":{
+                                        "type":"string"
+                                    },
+                                    "contentHeader":{
                                         "type":"string"
                                     },
                                     "content":{
@@ -80,10 +79,10 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "success"
+                        "description": "Success"
                     },
                     "404": {
-                        "description": "not found"
+                        "description": "Not Found"
                     }
                 }
             }
@@ -108,6 +107,9 @@
                 "responses": {
                     "200": {
                         "description": "Success"
+                    },
+                    "404": {
+                        "description": "Article Not Found"
                     }
                 }
             },
@@ -133,17 +135,19 @@
                             "schema":{
                                 "type":"object",
                                 "properties":{
-                                    "title": {
+                                    "thumbnail": {
                                         "type":"string"
                                     },
-                                    "thumbnail": {
-                                        "type":"string",
-                                        "format":"binary"
+                                    "title": {
+                                        "type":"string"
                                     },
                                     "type": {
                                         "type":"string"
                                     },
-                                    "read_duration": {
+                                    "readDuration": {
+                                        "type":"string"
+                                    },
+                                    "contentHeader":{
                                         "type":"string"
                                     },
                                     "content":{
@@ -157,6 +161,9 @@
                 "responses": {
                     "200": {
                         "description": "Success"
+                    },
+                    "404": {
+                        "description": "Article Not Found"
                     }
                 }
             },
@@ -178,6 +185,9 @@
                 "responses": {
                     "200": {
                         "description": "Success"
+                    },
+                    "404": {
+                        "description": "Article Not Found"
                     }
                 }
             }
@@ -193,10 +203,163 @@
                 "responses": {
                     "200": {
                         "description": "Success"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "post":{
+                "tags":[
+                    "Libraries"
+                ],
+                "summary": "Post Libraries",
+                "consumes": "multipart/form-data",
+                "requestBody":{
+                    "content":{
+                        "multipart/form-data" : {
+                            "schema":{
+                                "type":"object",
+                                "properties": {
+                                    "thumbnail":{
+                                        "type":"string"
+                                    },
+                                    "name":{
+                                        "type":"string"
+                                    },
+                                    "bodyType":{
+                                        "type":"string"
+                                    },
+                                    "problemSeverity":{
+                                        "type":"string"
+                                    },
+                                    "contentHeader":{
+                                        "type":"string"
+                                    },
+                                    "content":{
+                                        "type":"string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    },
+                    "404": {
+                        "description": "not found"
                     }
                 }
             }
         },
+        "/libraries/{id}":{
+            "get":{
+                "tags":[
+                    "Libraries"
+                ],
+                "summary": "Get One Libraries",
+                "description": "",
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID Libraries"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Library Not Found"
+                    }
+                }
+            },
+            "put":{
+                "tags":[
+                    "Libraries"
+                ],
+                "summary": "Update One Libraries",
+                "description": "",
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID Libraries"
+                    }
+                ],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "thumbnail": {
+                                        "type":"string"
+                                    },
+                                    "name": {
+                                        "type":"string"
+                                    },
+                                    "bodyType": {
+                                        "type":"string"
+                                    },
+                                    "problemSeverity": {
+                                        "type":"string"
+                                    },
+                                    "contentHeader":{
+                                        "type":"string"
+                                    },
+                                    "content":{
+                                        "type":"string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Library Not Found"
+                    }
+                }
+            },
+            "delete":{
+                "tags":[
+                    "Libraries"
+                ],
+                "summary":"Delete Libraries",
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID Libraries"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Library Not Found"
+                    }
+                }
+            }
+        },
+
         "/products":{
             "get":{
                 "tags":[
