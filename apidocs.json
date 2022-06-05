@@ -46,7 +46,7 @@
                 "tags":[
                     "Articles"
                 ],
-                "summary": "Post Article",
+                "summary": "Post an Article",
                 "consumes": "multipart/form-data",
                 "requestBody":{
                     "content":{
@@ -92,7 +92,7 @@
                 "tags":[
                     "Articles"
                 ],
-                "summary": "Get One Article",
+                "summary": "Get an Article",
                 "description": "",
                 "parameters":[
                     {
@@ -117,7 +117,7 @@
                 "tags":[
                     "Articles"
                 ],
-                "summary": "Update One Article",
+                "summary": "Update an Article",
                 "description": "",
                 "parameters":[
                     {
@@ -171,7 +171,7 @@
                 "tags":[
                     "Articles"
                 ],
-                "summary":"Delete Article",
+                "summary":"Delete an Article",
                 "parameters":[
                     {
                         "in": "path",
@@ -213,7 +213,7 @@
                 "tags":[
                     "Libraries"
                 ],
-                "summary": "Post Libraries",
+                "summary": "Post a Library",
                 "consumes": "multipart/form-data",
                 "requestBody":{
                     "content":{
@@ -259,7 +259,7 @@
                 "tags":[
                     "Libraries"
                 ],
-                "summary": "Get One Libraries",
+                "summary": "Get a Library",
                 "description": "",
                 "parameters":[
                     {
@@ -284,7 +284,7 @@
                 "tags":[
                     "Libraries"
                 ],
-                "summary": "Update One Libraries",
+                "summary": "Update a Library",
                 "description": "",
                 "parameters":[
                     {
@@ -338,7 +338,7 @@
                 "tags":[
                     "Libraries"
                 ],
-                "summary":"Delete Libraries",
+                "summary":"Delete a Library",
                 "parameters":[
                     {
                         "in": "path",
@@ -370,6 +370,158 @@
                 "responses": {
                     "200": {
                         "description": "Success"
+                    },
+                    "404": {
+                        "description": "Products Not Found"
+                    }
+                }
+            },
+            "post":{
+                "tags":[
+                    "Products"
+                ],
+                "summary": "Post a Product",
+                "consumes": "multipart/form-data",
+                "requestBody":{
+                    "content":{
+                        "multipart/form-data" : {
+                            "schema":{
+                                "type":"object",
+                                "properties": {
+                                    "thumbnail":{
+                                        "type":"string"
+                                    },
+                                    "name":{
+                                        "type":"string"
+                                    },
+                                    "brand":{
+                                        "type":"string"
+                                    },
+                                    "treatPart":{
+                                        "type":"string"
+                                    },
+                                    "contentHeader":{
+                                        "type":"string"
+                                    },
+                                    "content":{
+                                        "type":"string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    },
+                    "404": {
+                        "description": "Can't Post a Product"
+                    }
+                }
+            }
+        },
+        "/products/{id}":{
+            "get":{
+                "tags":[
+                    "Products"
+                ],
+                "summary": "Get a Product",
+                "description": "",
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID Products"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Product Not Found"
+                    }
+                }
+            },
+            "put":{
+                "tags":[
+                    "Products"
+                ],
+                "summary": "Update a Product",
+                "description": "",
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID Products"
+                    }
+                ],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "thumbnail": {
+                                        "type":"string"
+                                    },
+                                    "name": {
+                                        "type":"string"
+                                    },
+                                    "brand": {
+                                        "type":"string"
+                                    },
+                                    "treatPart": {
+                                        "type":"string"
+                                    },
+                                    "contentHeader":{
+                                        "type":"string"
+                                    },
+                                    "content":{
+                                        "type":"string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Product Not Found"
+                    }
+                }
+            },
+"delete":{
+                "tags":[
+                    "Products"
+                ],
+                "summary":"Delete a Product",
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID Products"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Product Not Found"
                     }
                 }
             }
