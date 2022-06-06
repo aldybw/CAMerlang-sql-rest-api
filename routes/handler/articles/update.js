@@ -68,11 +68,11 @@ module.exports = async (req, res) => {
       data: {
         id: updatedArticle.id,
         thumbnail: `${req.get("host")}/${updatedArticle.thumbnail}`,
-        title,
-        type,
+        title: updatedArticle.title,
+        type: updatedArticle.type,
         read_duration: updatedArticle.readDuration,
         contentHeader: updatedArticle.contentHeader,
-        content,
+        content: updatedArticle.content,
       },
     });
   } else {
@@ -115,15 +115,13 @@ module.exports = async (req, res) => {
         return res.json({
           status: "success",
           data: {
-            id: getArticle.id,
-            thumbnail: `${req.get(
-              "host"
-            )}/images/articles/thumbnails/${filename}`,
-            title,
-            type,
+            id: updatedArticle.id,
+            thumbnail: `${req.get("host")}/${updatedArticle.thumbnail}`,
+            title: updatedArticle.title,
+            type: updatedArticle.type,
             read_duration: updatedArticle.readDuration,
             contentHeader: updatedArticle.contentHeader,
-            content,
+            content: updatedArticle.content,
           },
         });
       }

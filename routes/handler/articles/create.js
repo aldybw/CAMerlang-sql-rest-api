@@ -74,9 +74,7 @@ module.exports = async (req, res) => {
         status: "success",
         data: {
           id: createdArticle.id,
-          thumbnail: `${req.get(
-            "host"
-          )}/images/articles/thumbnails/${filename}`,
+          thumbnail: `${req.get("host")}/${createdArticle.thumbnail}`,
           title: createdArticle.title,
           type: createdArticle.type,
           read_duration: createdArticle.readDuration,

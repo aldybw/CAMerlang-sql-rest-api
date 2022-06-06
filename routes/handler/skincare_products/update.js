@@ -58,7 +58,7 @@ module.exports = async (req, res) => {
       data: {
         id: updatedSkincareProduct.id,
         image: `${req.get("host")}/${updatedSkincareProduct.image}`,
-        name,
+        name: updatedSkincareProduct.name,
         brand: `${req.get("host")}/${updatedSkincareProduct.brand}`,
         is_popular: updatedSkincareProduct.isPopular,
         created_at: updatedSkincareProduct.createdAt,
@@ -130,7 +130,7 @@ module.exports = async (req, res) => {
               data: {
                 id: updatedSkincareProduct.id,
                 image: `${req.get("host")}/${updatedSkincareProduct.image}`,
-                name,
+                name: updatedSkincareProduct.name,
                 brand: `${req.get("host")}/${updatedSkincareProduct.brand}`,
                 is_popular: updatedSkincareProduct.isPopular,
                 created_at: updatedSkincareProduct.createdAt,
@@ -179,7 +179,7 @@ module.exports = async (req, res) => {
           data: {
             id: updatedSkincareProduct.id,
             image: `${req.get("host")}/${updatedSkincareProduct.image}`,
-            name,
+            name: updatedSkincareProduct.name,
             brand: `${req.get("host")}/${updatedSkincareProduct.brand}`,
             is_popular: updatedSkincareProduct.isPopular,
             created_at: updatedSkincareProduct.createdAt,
@@ -226,7 +226,7 @@ module.exports = async (req, res) => {
           data: {
             id: updatedSkincareProduct.id,
             image: `${req.get("host")}/${updatedSkincareProduct.image}`,
-            name,
+            name: updatedSkincareProduct.name,
             brand: `${req.get("host")}/${updatedSkincareProduct.brand}`,
             is_popular: updatedSkincareProduct.isPopular,
             created_at: updatedSkincareProduct.createdAt,

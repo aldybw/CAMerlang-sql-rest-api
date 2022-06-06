@@ -74,9 +74,7 @@ module.exports = async (req, res) => {
         status: "success",
         data: {
           id: createdLibrary.id,
-          thumbnail: `${req.get(
-            "host"
-          )}/images/libraries/thumbnails/${filename}`,
+          thumbnail: `${req.get("host")}/${createdLibrary.thumbnail}`,
           name: createdLibrary.name,
           body_type: createdLibrary.bodyType,
           problem_severity: createdLibrary.problemSeverity,
