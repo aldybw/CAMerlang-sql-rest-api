@@ -1,29 +1,29 @@
-const { problem_image } = require("../../../models/");
+const { notification_category } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const id = req.params.id;
 
-  const getProblemImage = await problem_image.findByPk(id, {
-    attributes: ["id", "image", "imageDescription", "createdAt", "updatedAt"],
+  const getNotificationCategory = await notification_category.findByPk(id, {
+    attributes: ["id", "name", "description", "createdAt", "updatedAt"],
   });
 
-  if (!getProblemImage) {
+  if (!getNotificationCategory) {
     return res.status(404).json({
       status: "error",
-      message: "problem image not found",
+      message: "notification category not found",
     });
   }
 
-  const specifiedProblemImage = {
-    id: getProblemImage.id,
-    image: `${req.get("host")}/${getProblemImage.image}`,
-    image_description: getProblemImage.imageDescription,
-    created_at: getProblemImage.createdAt,
-    updated_at: getProblemImage.updatedAt,
+  const specifiedNotificationCategory = {
+    id: getNotificationCategory.id,
+    name: getNotificationCategory.name,
+    description: getNotificationCategory.description,
+    created_at: getNotificationCategory.createdAt,
+    updated_at: getNotificationCategory.updatedAt,
   };
 
   return res.json({
     status: "success",
-    data: specifiedProblemImage,
+    data: specifiedNotificationCategory,
   });
 };

@@ -1,47 +1,55 @@
-const { problem_image } = require("../../../models/");
+const { notification_category } = require("../../../models/");
 
 module.exports = async (req, res) => {
-  const problemImageIds = req.query.problemImageIds || [];
-  const problemImageImageDescription =
-    req.query.problemImageImageDescription || [];
+  const notificationCategoryIds = req.query.notificationCategoryIds || [];
+  const notificationCategoryNames = req.query.notificationCategoryNames || [];
+  const notificationCategoryDescriptions =
+    req.query.notificationCategoryDescriptions || [];
 
   const sqlOptions = {
-    attributes: ["id", "image", "imageDescription", "createdAt", "updatedAt"],
+    attributes: ["id", "name", "description", "createdAt", "updatedAt"],
   };
 
-  if (problemImageIds.length) {
+  if (notificationCategoryIds.length) {
     sqlOptions.where = {
-      id: problemImageIds,
+      id: notificationCategoryIds,
     };
   }
-  if (problemImageImageDescription.length) {
+  if (notificationCategoryNames.length) {
     sqlOptions.where = {
-      name: problemImageImageDescription,
+      name: notificationCategoryNames,
+    };
+  }
+  if (notificationCategoryDescriptions.length) {
+    sqlOptions.where = {
+      description: notificationCategoryDescriptions,
     };
   }
 
-  const getAllProblemImages = await problem_image.findAll(sqlOptions);
+  const getAllNotificationCategories = await notification_category.findAll(
+    sqlOptions
+  );
 
-  if (getAllProblemImages.length === 0) {
+  if (getAllNotificationCategories.length === 0) {
     return res.json({
       status: "success",
-      message: "There is no libraries data",
+      message: "There is no notification categories data",
     });
   }
 
-  const mappedProblemImage = getAllProblemImages.map((l) => {
-    l = {
-      id: l.id,
-      image: `${req.get("host")}/${l.image}`,
-      image_description: l.imageDescription,
-      created_at: l.createdAt,
-      updated_at: l.updatedAt,
+  const mappedNotificationCategory = getAllNotificationCategories.map((n) => {
+    n = {
+      id: n.id,
+      name: n.name,
+      description: n.description,
+      created_at: n.createdAt,
+      updated_at: n.updatedAt,
     };
-    return l;
+    return n;
   });
 
   return res.json({
     status: "success",
-    data: mappedProblemImage,
+    data: mappedNotificationCategory,
   });
 };

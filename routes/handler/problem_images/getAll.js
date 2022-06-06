@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
   }
   if (problemImageImageDescription.length) {
     sqlOptions.where = {
-      name: problemImageImageDescription,
+      imageDescription: problemImageImageDescription,
     };
   }
 
@@ -25,19 +25,19 @@ module.exports = async (req, res) => {
   if (getAllProblemImages.length === 0) {
     return res.json({
       status: "success",
-      message: "There is no libraries data",
+      message: "There is no problem images data",
     });
   }
 
-  const mappedProblemImage = getAllProblemImages.map((l) => {
-    l = {
-      id: l.id,
-      image: `${req.get("host")}/${l.image}`,
-      image_description: l.imageDescription,
-      created_at: l.createdAt,
-      updated_at: l.updatedAt,
+  const mappedProblemImage = getAllProblemImages.map((p) => {
+    p = {
+      id: p.id,
+      image: `${req.get("host")}/${p.image}`,
+      image_description: p.imageDescription,
+      created_at: p.createdAt,
+      updated_at: p.updatedAt,
     };
-    return l;
+    return p;
   });
 
   return res.json({

@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
     },
     name: {
       type: "string",
-      empty: "false",
+      optional: true,
     },
     brand: {
       type: "string",

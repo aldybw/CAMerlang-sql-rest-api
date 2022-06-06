@@ -14,23 +14,24 @@ module.exports = async (req, res) => {
     },
     name: {
       type: "string",
-      empty: "false",
+      optional: true,
     },
     bodyType: {
       type: "string",
-      empty: "false",
+      optional: true,
     },
     problemSeverity: {
       type: "enum",
       values: ["light", "moderate", "serious", "severe", "critical", "various"],
+      optional: true,
     },
     contentHeader: {
       type: "string",
-      empty: "false",
+      optional: true,
     },
     content: {
       type: "string",
-      empty: "false",
+      optional: true,
     },
   };
 

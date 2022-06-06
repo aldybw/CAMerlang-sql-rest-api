@@ -14,23 +14,24 @@ module.exports = async (req, res) => {
     },
     title: {
       type: "string",
-      empty: "false",
+      optional: true,
     },
     type: {
       type: "enum",
       values: ["tips", "news", "people", "list", "review"],
+      optional: true,
     },
     readDuration: {
       type: "string",
-      empty: "false",
+      optional: true,
     },
     contentHeader: {
       type: "string",
-      empty: "false",
+      optional: true,
     },
     content: {
       type: "string",
-      empty: "false",
+      optional: true,
     },
   };
 

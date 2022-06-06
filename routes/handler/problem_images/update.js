@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
     },
     imageDescription: {
       type: "string",
-      empty: "false",
+      optional: true,
     },
   };
 
