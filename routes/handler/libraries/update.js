@@ -1,6 +1,3 @@
-const isBase64 = require("is-base64");
-const base64Img = require("base64-img");
-const fs = require("fs");
 const Validator = require("fastest-validator");
 const v = new Validator();
 
@@ -53,84 +50,29 @@ module.exports = async (req, res) => {
     });
   }
 
-  const thumbnail = req.body.thumbnail;
+  const { thumbnail, name, bodyType, problemSeverity, contentHeader, content } =
+    req.body;
+  const updatedLibrary = await getLibrary.update({
+    thumbnail,
+    name,
+    bodyType,
+    problemSeverity,
+    contentHeader,
+    content,
+  });
 
-  if (!thumbnail) {
-    const { name, bodyType, problemSeverity, contentHeader, content } =
-      req.body;
-    const updatedLibrary = await getLibrary.update({
-      name,
-      bodyType,
-      problemSeverity,
-      contentHeader,
-      content,
-    });
-    return res.json({
-      status: "success",
-      data: {
-        id: updatedLibrary.id,
-        thumbnail: `${req.get("host")}/${updatedLibrary.thumbnail}`,
-        name: updatedLibrary.name,
-        body_type: updatedLibrary.bodyType,
-        problem_severity: updatedLibrary.problemSeverity,
-        content_header: updatedLibrary.contentHeader,
-        content: updatedLibrary.content,
-        created_at: updatedLibrary.createdAt,
-        updated_at: updatedLibrary.updatedAt,
-      },
-    });
-  } else {
-    fs.unlink(`./public/${getLibrary.thumbnail}`, async (err) => {
-      if (err) {
-        return res.status(400).json({ status: "error", message: err.message });
-      }
-    });
-
-    if (!isBase64(thumbnail, { mimeRequired: true })) {
-      return res
-        .status(400)
-        .json({ status: "error", message: "invalid base64" });
-    }
-
-    base64Img.img(
-      thumbnail,
-      "./public/images/libraries/thumbnails",
-      Date.now(),
-      async (err, filepath) => {
-        if (err) {
-          return res
-            .status(400)
-            .json({ status: "error", message: err.message });
-        }
-
-        const filename = filepath.split("\\").pop().split("/").pop();
-
-        const { name, bodyType, problemSeverity, contentHeader, content } =
-          req.body;
-        const updatedLibrary = await getLibrary.update({
-          thumbnail: `images/libraries/thumbnails/${filename}`,
-          name,
-          bodyType,
-          problemSeverity,
-          contentHeader,
-          content,
-        });
-
-        return res.json({
-          status: "success",
-          data: {
-            id: updatedLibrary.id,
-            thumbnail: `${req.get("host")}/${updatedLibrary.thumbnail}`,
-            name: updatedLibrary.name,
-            body_type: updatedLibrary.bodyType,
-            problem_severity: updatedLibrary.problemSeverity,
-            content_header: updatedLibrary.contentHeader,
-            content: updatedLibrary.content,
-            created_at: updatedLibrary.createdAt,
-            updated_at: updatedLibrary.updatedAt,
-          },
-        });
-      }
-    );
-  }
+  return res.json({
+    status: "success",
+    data: {
+      id: updatedLibrary.id,
+      thumbnail: updatedLibrary.thumbnail,
+      name: updatedLibrary.name,
+      body_type: updatedLibrary.bodyType,
+      problem_severity: updatedLibrary.problemSeverity,
+      content_header: updatedLibrary.contentHeader,
+      content: updatedLibrary.content,
+      created_at: updatedLibrary.createdAt,
+      updated_at: updatedLibrary.updatedAt,
+    },
+  });
 };

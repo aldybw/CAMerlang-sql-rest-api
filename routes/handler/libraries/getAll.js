@@ -5,6 +5,8 @@ module.exports = async (req, res) => {
   const libraryNames = req.query.libraryNames || [];
   const libraryBodyTypes = req.query.libraryBodyTypes || [];
   const libraryProblemSeverities = req.query.libraryProblemSeverities || [];
+  const libraryContentHeaders = req.query.libraryContentHeaders || [];
+  const libraryContents = req.query.libraryContents || [];
 
   const sqlOptions = {
     attributes: [
@@ -40,6 +42,16 @@ module.exports = async (req, res) => {
       problemSeverity: libraryProblemSeverities,
     };
   }
+  if (libraryContentHeaders.length) {
+    sqlOptions.where = {
+      contentHeader: libraryContentHeaders,
+    };
+  }
+  if (libraryContents.length) {
+    sqlOptions.where = {
+      content: libraryContents,
+    };
+  }
 
   const getAllLibraries = await library.findAll(sqlOptions);
 
@@ -53,7 +65,7 @@ module.exports = async (req, res) => {
   const mappedLibrary = getAllLibraries.map((l) => {
     l = {
       id: l.id,
-      thumbnail: `${req.get("host")}/${l.thumbnail}`,
+      thumbnail: l.thumbnail,
       name: l.name,
       body_type: l.bodyType,
       problem_severity: l.problemSeverity,

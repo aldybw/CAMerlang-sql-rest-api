@@ -1,6 +1,3 @@
-const isBase64 = require("is-base64");
-const base64Img = require("base64-img");
-const fs = require("fs");
 const Validator = require("fastest-validator");
 const v = new Validator();
 
@@ -53,79 +50,28 @@ module.exports = async (req, res) => {
     });
   }
 
-  const thumbnail = req.body.thumbnail;
+  const { thumbnail, title, type, readDuration, contentHeader, content } =
+    req.body;
 
-  if (!thumbnail) {
-    const { title, type, readDuration, contentHeader, content } = req.body;
-    const updatedArticle = await getArticle.update({
-      title,
-      type,
-      readDuration,
-      contentHeader,
-      content,
-    });
-    return res.json({
-      status: "success",
-      data: {
-        id: updatedArticle.id,
-        thumbnail: `${req.get("host")}/${updatedArticle.thumbnail}`,
-        title: updatedArticle.title,
-        type: updatedArticle.type,
-        read_duration: updatedArticle.readDuration,
-        contentHeader: updatedArticle.contentHeader,
-        content: updatedArticle.content,
-      },
-    });
-  } else {
-    fs.unlink(`./public/${getArticle.thumbnail}`, async (err) => {
-      if (err) {
-        return res.status(400).json({ status: "error", message: err.message });
-      }
-    });
+  const updatedArticle = await getArticle.update({
+    thumbnail,
+    title,
+    type,
+    readDuration,
+    contentHeader,
+    content,
+  });
 
-    if (!isBase64(thumbnail, { mimeRequired: true })) {
-      return res
-        .status(400)
-        .json({ status: "error", message: "invalid base64" });
-    }
-
-    base64Img.img(
-      thumbnail,
-      "./public/images/articles/thumbnails",
-      Date.now(),
-      async (err, filepath) => {
-        if (err) {
-          return res
-            .status(400)
-            .json({ status: "error", message: err.message });
-        }
-
-        const filename = filepath.split("\\").pop().split("/").pop();
-
-        const { title, type, readDuration, contentHeader, content } = req.body;
-
-        const updatedArticle = await getArticle.update({
-          thumbnail: `images/articles/thumbnails/${filename}`,
-          title,
-          type,
-          readDuration,
-          contentHeader,
-          content,
-        });
-
-        return res.json({
-          status: "success",
-          data: {
-            id: updatedArticle.id,
-            thumbnail: `${req.get("host")}/${updatedArticle.thumbnail}`,
-            title: updatedArticle.title,
-            type: updatedArticle.type,
-            read_duration: updatedArticle.readDuration,
-            contentHeader: updatedArticle.contentHeader,
-            content: updatedArticle.content,
-          },
-        });
-      }
-    );
-  }
+  return res.json({
+    status: "success",
+    data: {
+      id: updatedArticle.id,
+      thumbnail: updatedArticle.thumbnail,
+      title: updatedArticle.title,
+      type: updatedArticle.type,
+      read_duration: updatedArticle.readDuration,
+      contentHeader: updatedArticle.contentHeader,
+      content: updatedArticle.content,
+    },
+  });
 };

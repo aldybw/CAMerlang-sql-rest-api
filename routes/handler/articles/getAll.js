@@ -5,6 +5,8 @@ module.exports = async (req, res) => {
   const articleTitles = req.query.articleTitles || [];
   const articleTypes = req.query.articleTypes || [];
   const articleReadDurations = req.query.articleReadDurations || [];
+  const articleContentHeaders = req.query.articleContentHeaders || [];
+  const articleContents = req.query.articleContents || [];
 
   const sqlOptions = {
     attributes: [
@@ -40,6 +42,16 @@ module.exports = async (req, res) => {
       readDuration: articleReadDurations,
     };
   }
+  if (articleContentHeaders.length) {
+    sqlOptions.where = {
+      contentHeader: articleContentHeaders,
+    };
+  }
+  if (articleContents.length) {
+    sqlOptions.where = {
+      content: articleContents,
+    };
+  }
 
   const getAllArticles = await article.findAll(sqlOptions);
 
@@ -53,7 +65,7 @@ module.exports = async (req, res) => {
   const mappedArticle = getAllArticles.map((a) => {
     a = {
       id: a.id,
-      thumbnail: `${req.get("host")}/${a.thumbnail}`,
+      thumbnail: a.thumbnail,
       title: a.title,
       type: a.type,
       read_duration: a.readDuration,

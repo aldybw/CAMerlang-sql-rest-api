@@ -39,9 +39,9 @@ module.exports = async (req, res) => {
   const mappedSkincareProduct = getAllSkincareProducts.map((s) => {
     s = {
       id: s.id,
-      image: `${req.get("host")}/${s.image}`,
+      image: s.image,
       name: s.name,
-      brand: `${req.get("host")}/${s.brand}`,
+      brand: s.brand,
       is_popular: s.isPopular,
       created_at: s.createdAt,
       updated_at: s.updatedAt,

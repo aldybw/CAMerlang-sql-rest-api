@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
 
   const specifiedProblemImage = {
     id: getProblemImage.id,
-    image: `${req.get("host")}/${getProblemImage.image}`,
+    image: getProblemImage.image,
     description: getProblemImage.description,
     created_at: getProblemImage.createdAt,
     updated_at: getProblemImage.updatedAt,

@@ -1,6 +1,3 @@
-const isBase64 = require("is-base64");
-const base64Img = require("base64-img");
-const fs = require("fs");
 const Validator = require("fastest-validator");
 const v = new Validator();
 
@@ -36,66 +33,20 @@ module.exports = async (req, res) => {
     });
   }
 
-  const image = req.body.image;
+  const { image, description } = req.body;
+  const updatedProblemImage = await getProblemImage.update({
+    image,
+    description,
+  });
 
-  if (!image) {
-    const { description } = req.body;
-    const updatedProblemImage = await getProblemImage.update({
-      description,
-    });
-    return res.json({
-      status: "success",
-      data: {
-        id: updatedProblemImage.id,
-        image: `${req.get("host")}/${updatedProblemImage.image}`,
-        description: updatedProblemImage.description,
-        created_at: updatedProblemImage.createdAt,
-        updated_at: updatedProblemImage.updatedAt,
-      },
-    });
-  } else {
-    fs.unlink(`./public/${getProblemImage.image}`, async (err) => {
-      if (err) {
-        return res.status(400).json({ status: "error", message: err.message });
-      }
-    });
-
-    if (!isBase64(image, { mimeRequired: true })) {
-      return res
-        .status(400)
-        .json({ status: "error", message: "invalid base64" });
-    }
-
-    base64Img.img(
-      image,
-      "./public/images/problem_images/images",
-      Date.now(),
-      async (err, filepath) => {
-        if (err) {
-          return res
-            .status(400)
-            .json({ status: "error", message: err.message });
-        }
-
-        const filename = filepath.split("\\").pop().split("/").pop();
-
-        const { description } = req.body;
-        const updatedProblemImage = await getProblemImage.update({
-          image: `images/problem_images/images/${filename}`,
-          description,
-        });
-
-        return res.json({
-          status: "success",
-          data: {
-            id: updatedProblemImage.id,
-            image: `${req.get("host")}/${updatedProblemImage.image}`,
-            description: updatedProblemImage.description,
-            created_at: updatedProblemImage.createdAt,
-            updated_at: updatedProblemImage.updatedAt,
-          },
-        });
-      }
-    );
-  }
+  return res.json({
+    status: "success",
+    data: {
+      id: updatedProblemImage.id,
+      image: updatedProblemImage.image,
+      description: updatedProblemImage.description,
+      created_at: updatedProblemImage.createdAt,
+      updated_at: updatedProblemImage.updatedAt,
+    },
+  });
 };

@@ -1,6 +1,3 @@
-const isBase64 = require("is-base64");
-const base64Img = require("base64-img");
-const fs = require("fs");
 const Validator = require("fastest-validator");
 const v = new Validator();
 
@@ -44,196 +41,25 @@ module.exports = async (req, res) => {
     });
   }
 
-  const image = req.body.image;
-  const brand = req.body.brand;
+  const { image, name, brand, isPopular } = req.body;
 
-  if (!image && !brand) {
-    const { name, isPopular } = req.body;
-    const updatedSkincareProduct = await getSkincareProduct.update({
-      name,
-      isPopular,
-    });
-    return res.json({
-      status: "success",
-      data: {
-        id: updatedSkincareProduct.id,
-        image: `${req.get("host")}/${updatedSkincareProduct.image}`,
-        name: updatedSkincareProduct.name,
-        brand: `${req.get("host")}/${updatedSkincareProduct.brand}`,
-        is_popular: updatedSkincareProduct.isPopular,
-        created_at: updatedSkincareProduct.createdAt,
-        updated_at: updatedSkincareProduct.updatedAt,
-      },
-    });
-  } else if (image && brand) {
-    fs.unlink(`./public/${getSkincareProduct.image}`, async (err) => {
-      if (err) {
-        return res.status(400).json({ status: "error", message: err.message });
-      }
-    });
+  const updatedSkincareProduct = await getSkincareProduct.update({
+    image,
+    name,
+    brand,
+    isPopular,
+  });
 
-    fs.unlink(`./public/${getSkincareProduct.brand}`, async (err) => {
-      if (err) {
-        return res.status(400).json({ status: "error", message: err.message });
-      }
-    });
-
-    if (!isBase64(image, { mimeRequired: true })) {
-      return res
-        .status(400)
-        .json({ status: "error", message: "invalid base64" });
-    }
-
-    if (!isBase64(brand, { mimeRequired: true })) {
-      return res
-        .status(400)
-        .json({ status: "error", message: "invalid base64" });
-    }
-
-    base64Img.img(
-      image,
-      "./public/images/skincare_products/images",
-      Date.now(),
-      async (err, filepath) => {
-        if (err) {
-          return res
-            .status(400)
-            .json({ status: "error", message: err.message });
-        }
-
-        const imageFilename = filepath.split("\\").pop().split("/").pop();
-
-        base64Img.img(
-          brand,
-          "./public/images/skincare_products/brands",
-          Date.now(),
-          async (err, filepath) => {
-            if (err) {
-              return res
-                .status(400)
-                .json({ status: "error", message: err.message });
-            }
-
-            const brandFilename = filepath.split("\\").pop().split("/").pop();
-
-            const { name, isPopular } = req.body;
-
-            const updatedSkincareProduct = await getSkincareProduct.update({
-              image: `images/skincare_products/images/${imageFilename}`,
-              name,
-              brand: `images/skincare_products/brands/${brandFilename}`,
-              isPopular,
-            });
-
-            return res.json({
-              status: "success",
-              data: {
-                id: updatedSkincareProduct.id,
-                image: `${req.get("host")}/${updatedSkincareProduct.image}`,
-                name: updatedSkincareProduct.name,
-                brand: `${req.get("host")}/${updatedSkincareProduct.brand}`,
-                is_popular: updatedSkincareProduct.isPopular,
-                created_at: updatedSkincareProduct.createdAt,
-                updated_at: updatedSkincareProduct.updatedAt,
-              },
-            });
-          }
-        );
-      }
-    );
-  } else if (image) {
-    fs.unlink(`./public/${getSkincareProduct.image}`, async (err) => {
-      if (err) {
-        return res.status(400).json({ status: "error", message: err.message });
-      }
-    });
-
-    if (!isBase64(image, { mimeRequired: true })) {
-      return res
-        .status(400)
-        .json({ status: "error", message: "invalid base64" });
-    }
-
-    base64Img.img(
-      image,
-      "./public/images/skincare_products/images",
-      Date.now(),
-      async (err, filepath) => {
-        if (err) {
-          return res
-            .status(400)
-            .json({ status: "error", message: err.message });
-        }
-
-        const filename = filepath.split("\\").pop().split("/").pop();
-
-        const { name, isPopular } = req.body;
-        const updatedSkincareProduct = await getSkincareProduct.update({
-          image: `images/skincare_products/images/${filename}`,
-          name,
-          isPopular,
-        });
-
-        return res.json({
-          status: "success",
-          data: {
-            id: updatedSkincareProduct.id,
-            image: `${req.get("host")}/${updatedSkincareProduct.image}`,
-            name: updatedSkincareProduct.name,
-            brand: `${req.get("host")}/${updatedSkincareProduct.brand}`,
-            is_popular: updatedSkincareProduct.isPopular,
-            created_at: updatedSkincareProduct.createdAt,
-            updated_at: updatedSkincareProduct.updatedAt,
-          },
-        });
-      }
-    );
-  } else if (brand) {
-    fs.unlink(`./public/${getSkincareProduct.brand}`, async (err) => {
-      if (err) {
-        return res.status(400).json({ status: "error", message: err.message });
-      }
-    });
-
-    if (!isBase64(brand, { mimeRequired: true })) {
-      return res
-        .status(400)
-        .json({ status: "error", message: "invalid base64" });
-    }
-
-    base64Img.img(
-      brand,
-      "./public/images/skincare_products/brands",
-      Date.now(),
-      async (err, filepath) => {
-        if (err) {
-          return res
-            .status(400)
-            .json({ status: "error", message: err.message });
-        }
-
-        const filename = filepath.split("\\").pop().split("/").pop();
-
-        const { name, isPopular } = req.body;
-        const updatedSkincareProduct = await getSkincareProduct.update({
-          brand: `images/skincare_products/brands/${filename}`,
-          name,
-          isPopular,
-        });
-
-        return res.json({
-          status: "success",
-          data: {
-            id: updatedSkincareProduct.id,
-            image: `${req.get("host")}/${updatedSkincareProduct.image}`,
-            name: updatedSkincareProduct.name,
-            brand: `${req.get("host")}/${updatedSkincareProduct.brand}`,
-            is_popular: updatedSkincareProduct.isPopular,
-            created_at: updatedSkincareProduct.createdAt,
-            updated_at: updatedSkincareProduct.updatedAt,
-          },
-        });
-      }
-    );
-  }
+  return res.json({
+    status: "success",
+    data: {
+      id: updatedSkincareProduct.id,
+      image: updatedSkincareProduct.image,
+      name: updatedSkincareProduct.name,
+      brand: updatedSkincareProduct.brand,
+      is_popular: updatedSkincareProduct.isPopular,
+      created_at: updatedSkincareProduct.createdAt,
+      updated_at: updatedSkincareProduct.updatedAt,
+    },
+  });
 };

@@ -31,7 +31,7 @@ module.exports = async (req, res) => {
   const mappedProblemImage = getAllProblemImages.map((p) => {
     p = {
       id: p.id,
-      image: `${req.get("host")}/${p.image}`,
+      image: p.image,
       description: p.description,
       created_at: p.createdAt,
       updated_at: p.updatedAt,

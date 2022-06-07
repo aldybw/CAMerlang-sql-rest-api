@@ -1,5 +1,3 @@
-const isBase64 = require("is-base64");
-const base64Img = require("base64-img");
 const Validator = require("fastest-validator");
 const v = new Validator();
 
@@ -26,40 +24,21 @@ module.exports = async (req, res) => {
     });
   }
 
-  const image = req.body.image;
+  const data = {
+    image: req.body.image,
+    description: req.body.description,
+  };
 
-  if (!isBase64(image, { mimeRequired: true })) {
-    return res.status(400).json({ status: "error", message: "invalid base64" });
-  }
+  const createdProblemImage = await problem_image.create(data);
 
-  base64Img.img(
-    image,
-    "./public/images/problem_images/images",
-    Date.now(),
-    async (err, filepath) => {
-      if (err) {
-        return res.status(400).json({ status: "error", message: err.message });
-      }
-
-      const filename = filepath.split("\\").pop().split("/").pop();
-
-      const data = {
-        image: `images/problem_images/images/${filename}`,
-        description: req.body.description,
-      };
-
-      const createdProblemImage = await problem_image.create(data);
-
-      return res.json({
-        status: "success",
-        data: {
-          id: createdProblemImage.id,
-          image: `${req.get("host")}/${createdProblemImage.image}`,
-          description: createdProblemImage.description,
-          created_at: createdProblemImage.createdAt,
-          updated_at: createdProblemImage.updatedAt,
-        },
-      });
-    }
-  );
+  return res.json({
+    status: "success",
+    data: {
+      id: createdProblemImage.id,
+      image: createdProblemImage.image,
+      description: createdProblemImage.description,
+      created_at: createdProblemImage.createdAt,
+      updated_at: createdProblemImage.updatedAt,
+    },
+  });
 };

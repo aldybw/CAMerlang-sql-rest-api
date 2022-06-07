@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
 
   const specifiedLibrary = {
     id: getLibrary.id,
-    thumbnail: `${req.get("host")}/${getLibrary.thumbnail}`,
+    thumbnail: getLibrary.thumbnail,
     name: getLibrary.name,
     body_type: getLibrary.bodyType,
     problem_severity: getLibrary.problemSeverity,

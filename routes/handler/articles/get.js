@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
 
   const specifiedArticle = {
     id: getArticle.id,
-    thumbnail: `${req.get("host")}/${getArticle.thumbnail}`,
+    thumbnail: getArticle.thumbnail,
     title: getArticle.title,
     type: getArticle.type,
     read_duration: getArticle.readDuration,

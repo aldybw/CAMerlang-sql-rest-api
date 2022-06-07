@@ -24,9 +24,9 @@ module.exports = async (req, res) => {
 
   const specifiedSkincareProduct = {
     id: getSkincareProduct.id,
-    image: `${req.get("host")}/${getSkincareProduct.image}`,
+    image: getSkincareProduct.image,
     name: getSkincareProduct.name,
-    brand: `${req.get("host")}/${getSkincareProduct.brand}`,
+    brand: getSkincareProduct.brand,
     is_popular: getSkincareProduct.isPopular,
     created_at: getSkincareProduct.createdAt,
     updated_at: getSkincareProduct.updatedAt,

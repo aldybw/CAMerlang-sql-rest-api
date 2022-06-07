@@ -1,4 +1,3 @@
-const fs = require("fs");
 const { problem_image } = require("../../../models/");
 
 module.exports = async (req, res) => {
@@ -12,16 +11,10 @@ module.exports = async (req, res) => {
       .json({ status: "error", message: "problem image not found" });
   }
 
-  fs.unlink(`./public/${getProblemImage.image}`, async (err) => {
-    if (err) {
-      return res.status(400).json({ status: "error", message: err.message });
-    }
+  await getProblemImage.destroy();
 
-    await getProblemImage.destroy();
-
-    return res.json({
-      status: "success",
-      message: "problem image deleted",
-    });
+  return res.json({
+    status: "success",
+    message: "problem image deleted",
   });
 };
