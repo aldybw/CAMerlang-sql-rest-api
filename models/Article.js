@@ -32,6 +32,26 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    expertImage: {
+      field: "expert_image",
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    expertName: {
+      field: "expert_name",
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    expertSpecialization: {
+      field: "expert_specialization",
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    expertVerificationDate: {
+      field: "expert_verification_date",
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     createdAt: {
       field: "created_at",
       type: DataTypes.DATE,

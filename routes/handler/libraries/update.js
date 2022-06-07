@@ -30,6 +30,22 @@ module.exports = async (req, res) => {
       type: "string",
       optional: true,
     },
+    expertImage: {
+      type: "string",
+      optional: true,
+    },
+    expertName: {
+      type: "string",
+      optional: true,
+    },
+    expertSpecialization: {
+      type: "string",
+      optional: true,
+    },
+    expertVerificationDate: {
+      type: "string",
+      optional: true,
+    },
   };
 
   const validate = v.validate(req.body, schema);
@@ -50,8 +66,19 @@ module.exports = async (req, res) => {
     });
   }
 
-  const { thumbnail, name, bodyType, problemSeverity, contentHeader, content } =
-    req.body;
+  const {
+    thumbnail,
+    name,
+    bodyType,
+    problemSeverity,
+    contentHeader,
+    content,
+    expertImage,
+    expertName,
+    expertSpecialization,
+    expertVerificationDate,
+  } = req.body;
+
   const updatedLibrary = await getLibrary.update({
     thumbnail,
     name,
@@ -59,6 +86,10 @@ module.exports = async (req, res) => {
     problemSeverity,
     contentHeader,
     content,
+    expertImage,
+    expertName,
+    expertSpecialization,
+    expertVerificationDate,
   });
 
   return res.json({
@@ -71,6 +102,10 @@ module.exports = async (req, res) => {
       problem_severity: updatedLibrary.problemSeverity,
       content_header: updatedLibrary.contentHeader,
       content: updatedLibrary.content,
+      expert_image: updatedLibrary.expertImage,
+      expert_name: updatedLibrary.expertName,
+      expert_specialization: updatedLibrary.expertSpecialization,
+      expert_verification_date: updatedLibrary.expertVerificationDate,
       created_at: updatedLibrary.createdAt,
       updated_at: updatedLibrary.updatedAt,
     },

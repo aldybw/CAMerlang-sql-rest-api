@@ -5,8 +5,9 @@ module.exports = async (req, res) => {
   const libraryNames = req.query.libraryNames || [];
   const libraryBodyTypes = req.query.libraryBodyTypes || [];
   const libraryProblemSeverities = req.query.libraryProblemSeverities || [];
-  const libraryContentHeaders = req.query.libraryContentHeaders || [];
-  const libraryContents = req.query.libraryContents || [];
+  const libraryExpertNames = req.query.libraryExpertNames || [];
+  const libraryExpertSpecializations =
+    req.query.libraryExpertSpecializations || [];
 
   const sqlOptions = {
     attributes: [
@@ -17,6 +18,10 @@ module.exports = async (req, res) => {
       "problemSeverity",
       "contentHeader",
       "content",
+      "expertImage",
+      "expertName",
+      "expertSpecialization",
+      "expertVerificationDate",
       "createdAt",
       "updatedAt",
     ],
@@ -52,6 +57,16 @@ module.exports = async (req, res) => {
       content: libraryContents,
     };
   }
+  if (libraryExpertNames.length) {
+    sqlOptions.where = {
+      expertName: libraryExpertNames,
+    };
+  }
+  if (libraryExpertSpecializations.length) {
+    sqlOptions.where = {
+      expertSpecialization: libraryExpertSpecializations,
+    };
+  }
 
   const getAllLibraries = await library.findAll(sqlOptions);
 
@@ -71,6 +86,10 @@ module.exports = async (req, res) => {
       problem_severity: l.problemSeverity,
       content_header: l.contentHeader,
       content: l.content,
+      expert_image: l.expertImage,
+      expert_name: l.expertName,
+      expert_specialization: l.expertSpecialization,
+      expert_verification_date: l.expertVerificationDate,
       created_at: l.createdAt,
       updated_at: l.updatedAt,
     };

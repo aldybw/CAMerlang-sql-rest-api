@@ -34,6 +34,22 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false,
       },
+      expert_image: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      expert_name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      expert_specialization: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      expert_verification_date: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
