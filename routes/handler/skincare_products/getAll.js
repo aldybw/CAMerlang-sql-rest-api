@@ -3,7 +3,6 @@ const { skincare_product } = require("../../../models/");
 module.exports = async (req, res) => {
   const skincareProductIds = req.query.skincareProductIds || [];
   const skincareProductNames = req.query.skincareProductNames || [];
-  const skincareProductIsPopular = req.query.skincareProductIsPopular || [];
 
   const sqlOptions = {
     attributes: [
@@ -24,12 +23,7 @@ module.exports = async (req, res) => {
   }
   if (skincareProductNames.length) {
     sqlOptions.where = {
-      title: skincareProductNames,
-    };
-  }
-  if (skincareProductIsPopular.length) {
-    sqlOptions.where = {
-      type: skincareProductIsPopular,
+      name: skincareProductNames,
     };
   }
 
@@ -46,7 +40,7 @@ module.exports = async (req, res) => {
     s = {
       id: s.id,
       image: `${req.get("host")}/${s.image}`,
-      title: s.title,
+      name: s.name,
       brand: `${req.get("host")}/${s.brand}`,
       is_popular: s.isPopular,
       created_at: s.createdAt,

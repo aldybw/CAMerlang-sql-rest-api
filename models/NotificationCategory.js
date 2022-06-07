@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     name: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM("general", "tips", "reminder"),
       allowNull: false,
     },
     description: {

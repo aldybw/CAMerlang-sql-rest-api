@@ -3,19 +3,23 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     // logic for transforming into the new state
-    return queryInterface.createTable("problem_images", {
+    return queryInterface.createTable("notifications", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-      image: {
+      type: {
+        type: Sequelize.ENUM("general", "tips", "reminder"),
+        allowNull: false,
+      },
+      message_header: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      description: {
-        type: Sequelize.STRING,
+      message_content: {
+        type: Sequelize.TEXT,
         allowNull: false,
       },
       created_at: {
@@ -30,6 +34,6 @@ module.exports = {
   },
   down: (queryInterface, Sequelize) => {
     // logic for reverting the changes
-    return queryInterface.dropTable("problem_images");
+    return queryInterface.dropTable("notifications");
   },
 };

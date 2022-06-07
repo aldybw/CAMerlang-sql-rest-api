@@ -4,7 +4,7 @@ module.exports = async (req, res) => {
   const id = req.params.id;
 
   const getProblemImage = await problem_image.findByPk(id, {
-    attributes: ["id", "image", "imageDescription", "createdAt", "updatedAt"],
+    attributes: ["id", "image", "description", "createdAt", "updatedAt"],
   });
 
   if (!getProblemImage) {
@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
   const specifiedProblemImage = {
     id: getProblemImage.id,
     image: `${req.get("host")}/${getProblemImage.image}`,
-    image_description: getProblemImage.imageDescription,
+    description: getProblemImage.description,
     created_at: getProblemImage.createdAt,
     updated_at: getProblemImage.updatedAt,
   };

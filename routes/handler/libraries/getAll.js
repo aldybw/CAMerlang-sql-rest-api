@@ -4,7 +4,7 @@ module.exports = async (req, res) => {
   const libraryIds = req.query.libraryIds || [];
   const libraryNames = req.query.libraryNames || [];
   const libraryBodyTypes = req.query.libraryBodyTypes || [];
-  const libraryProblemSeverity = req.query.libraryProblemSeverity || [];
+  const libraryProblemSeverities = req.query.libraryProblemSeverities || [];
 
   const sqlOptions = {
     attributes: [
@@ -35,9 +35,9 @@ module.exports = async (req, res) => {
       bodyType: libraryBodyTypes,
     };
   }
-  if (libraryProblemSeverity.length) {
+  if (libraryProblemSeverities.length) {
     sqlOptions.where = {
-      problemSeverity: libraryProblemSeverity,
+      problemSeverity: libraryProblemSeverities,
     };
   }
 

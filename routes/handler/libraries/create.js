@@ -22,6 +22,7 @@ module.exports = async (req, res) => {
     problemSeverity: {
       type: "enum",
       values: ["light", "moderate", "serious", "severe", "critical", "various"],
+      empty: "false",
     },
     contentHeader: {
       type: "string",

@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
       type: "string",
       optional: true,
     },
-    imageDescription: {
+    description: {
       type: "string",
       optional: true,
     },
@@ -39,16 +39,16 @@ module.exports = async (req, res) => {
   const image = req.body.image;
 
   if (!image) {
-    const { imageDescription } = req.body;
+    const { description } = req.body;
     const updatedProblemImage = await getProblemImage.update({
-      imageDescription,
+      description,
     });
     return res.json({
       status: "success",
       data: {
         id: updatedProblemImage.id,
         image: `${req.get("host")}/${updatedProblemImage.image}`,
-        image_description: updatedProblemImage.imageDescription,
+        description: updatedProblemImage.description,
         created_at: updatedProblemImage.createdAt,
         updated_at: updatedProblemImage.updatedAt,
       },
@@ -79,10 +79,10 @@ module.exports = async (req, res) => {
 
         const filename = filepath.split("\\").pop().split("/").pop();
 
-        const { imageDescription } = req.body;
+        const { description } = req.body;
         const updatedProblemImage = await getProblemImage.update({
           image: `images/problem_images/images/${filename}`,
-          imageDescription,
+          description,
         });
 
         return res.json({
@@ -90,7 +90,7 @@ module.exports = async (req, res) => {
           data: {
             id: updatedProblemImage.id,
             image: `${req.get("host")}/${updatedProblemImage.image}`,
-            image_description: updatedProblemImage.imageDescription,
+            description: updatedProblemImage.description,
             created_at: updatedProblemImage.createdAt,
             updated_at: updatedProblemImage.updatedAt,
           },

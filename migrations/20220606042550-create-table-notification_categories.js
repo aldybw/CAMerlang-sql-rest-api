@@ -11,7 +11,7 @@ module.exports = {
         allowNull: false,
       },
       name: {
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM("general", "tips", "reminder"),
         allowNull: false,
       },
       description: {

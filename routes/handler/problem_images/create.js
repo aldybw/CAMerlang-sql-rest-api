@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
       type: "string",
       empty: "false",
     },
-    imageDescription: {
+    description: {
       type: "string",
       empty: "false",
     },
@@ -45,7 +45,7 @@ module.exports = async (req, res) => {
 
       const data = {
         image: `images/problem_images/images/${filename}`,
-        imageDescription: req.body.imageDescription,
+        description: req.body.description,
       };
 
       const createdProblemImage = await problem_image.create(data);
@@ -55,7 +55,7 @@ module.exports = async (req, res) => {
         data: {
           id: createdProblemImage.id,
           image: `${req.get("host")}/${createdProblemImage.image}`,
-          image_description: createdProblemImage.imageDescription,
+          description: createdProblemImage.description,
           created_at: createdProblemImage.createdAt,
           updated_at: createdProblemImage.updatedAt,
         },

@@ -1,17 +1,23 @@
 module.exports = (sequelize, DataTypes) => {
-  const ProblemImage = sequelize.define("problem_image", {
+  const Notification = sequelize.define("notification", {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false,
     },
-    image: {
+    type: {
+      type: DataTypes.ENUM("general", "tips", "reminder"),
+      allowNull: false,
+    },
+    messageHeader: {
+      field: "message_header",
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: {
-      type: DataTypes.STRING,
+    messageContent: {
+      field: "message_content",
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     createdAt: {
@@ -26,5 +32,5 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  return ProblemImage;
+  return Notification;
 };

@@ -1,6 +1,3 @@
-const isBase64 = require("is-base64");
-const base64Img = require("base64-img");
-const fs = require("fs");
 const Validator = require("fastest-validator");
 const v = new Validator();
 
@@ -9,7 +6,8 @@ const { notification_category } = require("../../../models/");
 module.exports = async (req, res) => {
   const schema = {
     name: {
-      type: "string",
+      type: "enum",
+      values: ["general", "tips", "reminder"],
       optional: true,
     },
     description: {

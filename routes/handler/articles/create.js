@@ -18,6 +18,7 @@ module.exports = async (req, res) => {
     type: {
       type: "enum",
       values: ["tips", "news", "people", "list", "review"],
+      empty: "false",
     },
     readDuration: {
       type: "string",

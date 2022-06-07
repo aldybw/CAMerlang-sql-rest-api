@@ -6,7 +6,8 @@ const { notification_category } = require("../../../models/");
 module.exports = async (req, res) => {
   const schema = {
     name: {
-      type: "string",
+      type: "enum",
+      values: ["general", "tips", "reminder"],
       empty: "false",
     },
     description: {

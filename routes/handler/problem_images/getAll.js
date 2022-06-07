@@ -2,11 +2,10 @@ const { problem_image } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const problemImageIds = req.query.problemImageIds || [];
-  const problemImageImageDescription =
-    req.query.problemImageImageDescription || [];
+  const problemImageDescriptions = req.query.problemImageDescriptions || [];
 
   const sqlOptions = {
-    attributes: ["id", "image", "imageDescription", "createdAt", "updatedAt"],
+    attributes: ["id", "image", "description", "createdAt", "updatedAt"],
   };
 
   if (problemImageIds.length) {
@@ -14,9 +13,9 @@ module.exports = async (req, res) => {
       id: problemImageIds,
     };
   }
-  if (problemImageImageDescription.length) {
+  if (problemImageDescriptions.length) {
     sqlOptions.where = {
-      imageDescription: problemImageImageDescription,
+      description: problemImageDescriptions,
     };
   }
 
@@ -33,7 +32,7 @@ module.exports = async (req, res) => {
     p = {
       id: p.id,
       image: `${req.get("host")}/${p.image}`,
-      image_description: p.imageDescription,
+      description: p.description,
       created_at: p.createdAt,
       updated_at: p.updatedAt,
     };
