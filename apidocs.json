@@ -21,8 +21,20 @@
       "description": "API for Libraries"
     },
     {
-      "name": "Products",
-      "description": "API for Products"
+      "name": "Skin Care Products",
+      "description": "API for Skin Care Products"
+    },
+    {
+      "name": "Problem Iamges",
+      "description": "API for Problem Iamges"
+    },
+    {
+      "name": "Notification Categories",
+      "description": "API for Notification Categories"
+    },
+    {
+      "name": "Notifications",
+      "description": "API for Notifications"
     }
   ],
   "paths": {
@@ -340,10 +352,10 @@
       }
     },
 
-    "/products": {
+    "/skincare_products": {
       "get": {
-        "tags": ["Products"],
-        "summary": "Get All Products",
+        "tags": ["Skin Care Products"],
+        "summary": "Get All Skin Care Products",
         "description": "",
         "responses": {
           "200": {
@@ -355,8 +367,8 @@
         }
       },
       "post": {
-        "tags": ["Products"],
-        "summary": "Post a Product",
+        "tags": ["Skin Care Products"],
+        "summary": "Post a Skin Care Product",
         "consumes": "multipart/form-data",
         "requestBody": {
           "content": {
@@ -397,9 +409,9 @@
         }
       }
     },
-    "/products/{id}": {
+    "/skincare_products/{id}": {
       "get": {
-        "tags": ["Products"],
+        "tags": ["Skin Care Products"],
         "summary": "Get a Product",
         "description": "",
         "parameters": [
@@ -422,7 +434,7 @@
         }
       },
       "put": {
-        "tags": ["Products"],
+        "tags": ["Skin Care Products"],
         "summary": "Update a Product",
         "description": "",
         "parameters": [
@@ -474,7 +486,7 @@
         }
       },
       "delete": {
-        "tags": ["Products"],
+        "tags": ["Skin Care Products"],
         "summary": "Delete a Product",
         "parameters": [
           {
@@ -492,6 +504,474 @@
           },
           "404": {
             "description": "Product Not Found"
+          }
+        }
+      }
+    },
+    "/problem_images": {
+      "get": {
+        "tags": ["Problem Images"],
+        "summary": "Get All Problem Images",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Problem Images Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Problem Images"],
+        "summary": "Post a Problem Images",
+        "consumes": "multipart/form-data",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "thumbnail": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "brand": {
+                    "type": "string"
+                  },
+                  "treatPart": {
+                    "type": "string"
+                  },
+                  "contentHeader": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "success"
+          },
+          "404": {
+            "description": "Can't Post a Problem Images"
+          }
+        }
+      }
+    },
+    "/problem_images/{id}": {
+      "get": {
+        "tags": ["Problem Images"],
+        "summary": "Get a Problem Image",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID Problem Images"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Problem Image Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Problem Images"],
+        "summary": "Update a Problem Image",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID Problem Images"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "thumbnail": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "brand": {
+                    "type": "string"
+                  },
+                  "treatPart": {
+                    "type": "string"
+                  },
+                  "contentHeader": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Product Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Problem Images"],
+        "summary": "Delete a Problem Image",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID Problem Images"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Problem Image Not Found"
+          }
+        }
+      }
+    },
+    "/notification_categories": {
+      "get": {
+        "tags": ["Notification Categories"],
+        "summary": "Get All Notification Categories",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Notification Categories Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Notification Categories"],
+        "summary": "Post a Notification Category",
+        "consumes": "multipart/form-data",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "thumbnail": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "brand": {
+                    "type": "string"
+                  },
+                  "treatPart": {
+                    "type": "string"
+                  },
+                  "contentHeader": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "success"
+          },
+          "404": {
+            "description": "Can't Post a Notification Category"
+          }
+        }
+      }
+    },
+"/notification_categories/{id}": {
+      "get": {
+        "tags": ["Notification Categories"],
+        "summary": "Get a Notification Category",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID Notification Categories"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Notification Category Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Notification Categories"],
+        "summary": "Update a Notification Category",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID Notification Categories"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "thumbnail": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "brand": {
+                    "type": "string"
+                  },
+                  "treatPart": {
+                    "type": "string"
+                  },
+                  "contentHeader": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Notification Category Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Notification Categories"],
+        "summary": "Delete a Notification Category",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID Notification Categories"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Notification Category Not Found"
+          }
+        }
+      }
+    },
+    "/notifications": {
+      "get": {
+        "tags": ["Notifications"],
+        "summary": "Get All Notifications",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Notifications Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Notifications"],
+        "summary": "Post a Notification",
+        "consumes": "multipart/form-data",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "thumbnail": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "brand": {
+                    "type": "string"
+                  },
+                  "treatPart": {
+                    "type": "string"
+                  },
+                  "contentHeader": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "success"
+          },
+          "404": {
+            "description": "Can't Post a Notification"
+          }
+        }
+      }
+    },
+"/notifications/{id}": {
+      "get": {
+        "tags": ["Notifications"],
+        "summary": "Get a Notification",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID Notifications"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Notification Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Notifications"],
+        "summary": "Update a Notification",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID Notifications"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "thumbnail": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "brand": {
+                    "type": "string"
+                  },
+                  "treatPart": {
+                    "type": "string"
+                  },
+                  "contentHeader": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Notification Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Notifications"],
+        "summary": "Delete a Notification",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID Notifications"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Notification Not Found"
           }
         }
       }
