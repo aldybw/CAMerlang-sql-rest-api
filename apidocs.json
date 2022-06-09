@@ -25,8 +25,8 @@
       "description": "API for Skin Care Products"
     },
     {
-      "name": "Problem Iamges",
-      "description": "API for Problem Iamges"
+      "name": "Problem Images",
+      "description": "API for Problem Images"
     },
     {
       "name": "Notification Categories",
@@ -63,22 +63,45 @@
                 "type": "object",
                 "properties": {
                   "thumbnail": {
-                    "type": "string"
+                    "type": "string",
+                    "empty": "false"
                   },
                   "title": {
-                    "type": "string"
+                    "type": "string",
+                    "empty": "false"
                   },
                   "type": {
-                    "type": "string"
+                    "type": "string",
+                    "values": ["tips", "news", "people", "list", "review"],
+                    "empty": "false"
                   },
                   "readDuration": {
-                    "type": "string"
+                    "type": "string",
+                    "empty": "false"
                   },
                   "contentHeader": {
-                    "type": "string"
+                    "type": "string",
+                    "empty": "false"
                   },
                   "content": {
-                    "type": "string"
+                    "type": "string",
+                    "empty": "false"
+                  },
+                  "expertImage": {
+                    "type": "string",
+                    "empty": "false"
+                  },
+                  "expertName": {
+                    "type": "string",
+                    "empty": "false"
+                  },
+                  "expertSpecialization": {
+                    "type": "string",
+                    "empty": "false"
+                  },
+                  "expertVerificationDate": {
+                    "type": "string",
+                    "empty": "false"
                   }
                 }
               }
@@ -140,22 +163,45 @@
                 "type": "object",
                 "properties": {
                   "thumbnail": {
-                    "type": "string"
+                    "type": "string",
+                    "empty": "false"
                   },
                   "title": {
-                    "type": "string"
+                    "type": "string",
+                    "empty": "false"
                   },
                   "type": {
-                    "type": "string"
+                    "type": "string",
+                    "values": ["tips", "news", "people", "list", "review"],
+                    "empty": "false"
                   },
                   "readDuration": {
-                    "type": "string"
+                    "type": "string",
+                    "empty": "false"
                   },
                   "contentHeader": {
-                    "type": "string"
+                    "type": "string",
+                    "empty": "false"
                   },
                   "content": {
-                    "type": "string"
+                    "type": "string",
+                    "empty": "false"
+                  },
+                  "expertImage": {
+                    "type": "string",
+                    "empty": "false"
+                  },
+                  "expertName": {
+                    "type": "string",
+                    "empty": "false"
+                  },
+                  "expertSpecialization": {
+                    "type": "string",
+                    "empty": "false"
+                  },
+                  "expertVerificationDate": {
+                    "type": "string",
+                    "empty": "false"
                   }
                 }
               }
@@ -236,6 +282,18 @@
                   },
                   "content": {
                     "type": "string"
+                  },
+                  "expertImage": {
+                    "type": "string"
+                  },
+                  "expertName": {
+                    "type": "string"
+                  },
+                  "expertSpecialization": {
+                    "type": "string"
+                  },
+                  "expertVerificationDate": {
+                    "type": "string"
                   }
                 }
               }
@@ -313,6 +371,18 @@
                   },
                   "content": {
                     "type": "string"
+                  },
+                  "expertImage": {
+                    "type": "string"
+                  },
+                  "expertName": {
+                    "type": "string"
+                  },
+                  "expertSpecialization": {
+                    "type": "string"
+                  },
+                  "expertVerificationDate": {
+                    "type": "string"
                   }
                 }
               }
@@ -376,7 +446,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "thumbnail": {
+                  "image": {
                     "type": "string"
                   },
                   "name": {
@@ -385,14 +455,8 @@
                   "brand": {
                     "type": "string"
                   },
-                  "treatPart": {
-                    "type": "string"
-                  },
-                  "contentHeader": {
-                    "type": "string"
-                  },
-                  "content": {
-                    "type": "string"
+                  "isPopular": {
+                    "type": "boolean"
                   }
                 }
               }
@@ -453,7 +517,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "thumbnail": {
+                  "image": {
                     "type": "string"
                   },
                   "name": {
@@ -462,14 +526,8 @@
                   "brand": {
                     "type": "string"
                   },
-                  "treatPart": {
-                    "type": "string"
-                  },
-                  "contentHeader": {
-                    "type": "string"
-                  },
-                  "content": {
-                    "type": "string"
+                  "isPopular": {
+                    "type": "boolean"
                   }
                 }
               }
@@ -532,23 +590,13 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "thumbnail": {
-                    "type": "string"
+                  "image": {
+                    "type": "string",
+                    "empty": "false"
                   },
-                  "name": {
-                    "type": "string"
-                  },
-                  "brand": {
-                    "type": "string"
-                  },
-                  "treatPart": {
-                    "type": "string"
-                  },
-                  "contentHeader": {
-                    "type": "string"
-                  },
-                  "content": {
-                    "type": "string"
+                  "description": {
+                    "type": "string",
+                    "empty": "false"
                   }
                 }
               }
@@ -609,23 +657,13 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "thumbnail": {
-                    "type": "string"
+                  "image": {
+                    "type": "string",
+                    "empty": "false"
                   },
-                  "name": {
-                    "type": "string"
-                  },
-                  "brand": {
-                    "type": "string"
-                  },
-                  "treatPart": {
-                    "type": "string"
-                  },
-                  "contentHeader": {
-                    "type": "string"
-                  },
-                  "content": {
-                    "type": "string"
+                  "description": {
+                    "type": "string",
+                    "empty": "false"
                   }
                 }
               }
@@ -688,23 +726,14 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "thumbnail": {
-                    "type": "string"
-                  },
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "values": ["general", "tips", "reminder"],
+                    "empty": "false"
                   },
-                  "brand": {
-                    "type": "string"
-                  },
-                  "treatPart": {
-                    "type": "string"
-                  },
-                  "contentHeader": {
-                    "type": "string"
-                  },
-                  "content": {
-                    "type": "string"
+                  "description": {
+                    "type": "string",
+                    "empty": "false"
                   }
                 }
               }
@@ -765,23 +794,14 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "thumbnail": {
-                    "type": "string"
-                  },
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "values": ["general", "tips", "reminder"],
+                    "empty": "false"
                   },
-                  "brand": {
-                    "type": "string"
-                  },
-                  "treatPart": {
-                    "type": "string"
-                  },
-                  "contentHeader": {
-                    "type": "string"
-                  },
-                  "content": {
-                    "type": "string"
+                  "description": {
+                    "type": "string",
+                    "empty": "false"
                   }
                 }
               }
@@ -844,23 +864,18 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "thumbnail": {
-                    "type": "string"
+                  "type": {
+                    "type": "string",
+                    "values": ["general", "tips", "reminder"],
+                    "empty": "false"
                   },
-                  "name": {
-                    "type": "string"
+                  "messageHeader": {
+                    "type": "string",
+                    "empty": "false"
                   },
-                  "brand": {
-                    "type": "string"
-                  },
-                  "treatPart": {
-                    "type": "string"
-                  },
-                  "contentHeader": {
-                    "type": "string"
-                  },
-                  "content": {
-                    "type": "string"
+                  "messageContent": {
+                    "type": "string",
+                    "empty": "false"
                   }
                 }
               }
@@ -921,23 +936,18 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "thumbnail": {
-                    "type": "string"
+                  "type": {
+                    "type": "string",
+                    "values": ["general", "tips", "reminder"],
+                    "empty": "false"
                   },
-                  "name": {
-                    "type": "string"
+                  "messageHeader": {
+                    "type": "string",
+                    "empty": "false"
                   },
-                  "brand": {
-                    "type": "string"
-                  },
-                  "treatPart": {
-                    "type": "string"
-                  },
-                  "contentHeader": {
-                    "type": "string"
-                  },
-                  "content": {
-                    "type": "string"
+                  "messageContent": {
+                    "type": "string",
+                    "empty": "false"
                   }
                 }
               }
