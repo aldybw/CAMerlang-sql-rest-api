@@ -1125,7 +1125,7 @@
             "description": "Success"
           },
           "404": {
-            "description": "Notification Not Found"
+            "description": "Expert Not Found"
           }
         }
       },
