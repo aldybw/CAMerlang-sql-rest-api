@@ -11,6 +11,7 @@ const skincareProductsRouter = require("./routes/skincare_products");
 const problemImagesRouter = require("./routes/problem_images");
 const notificationCategoriesRouter = require("./routes/notification_categories");
 const notificationsRouter = require("./routes/notifications");
+const expertsRouter = require("./routes/experts");
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use("/skincare_products", skincareProductsRouter);
 app.use("/problem_images", problemImagesRouter);
 app.use("/notification_categories", notificationCategoriesRouter);
 app.use("/notifications", notificationsRouter);
+app.use("/experts", expertsRouter);
 
 // Swagger API
 const swaggerUi = require("swagger-ui-express");

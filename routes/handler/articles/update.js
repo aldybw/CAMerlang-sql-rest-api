@@ -100,7 +100,7 @@ module.exports = async (req, res) => {
       title: updatedArticle.title,
       type: updatedArticle.type,
       read_duration: updatedArticle.readDuration,
-      contentHeader: updatedArticle.contentHeader,
+      content_header: updatedArticle.contentHeader,
       content: updatedArticle.content,
       expert_image: updatedArticle.expertImage,
       expert_name: updatedArticle.expertName,

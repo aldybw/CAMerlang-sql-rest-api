@@ -48,7 +48,7 @@ module.exports = async (req, res) => {
       image: createdSkincareProducts.image,
       name: createdSkincareProducts.name,
       brand: createdSkincareProducts.brand,
-      isPopular: createdSkincareProducts.isPopular,
+      is_popular: createdSkincareProducts.isPopular,
       created_at: createdSkincareProducts.createdAt,
       updated_at: createdSkincareProducts.updatedAt,
     },

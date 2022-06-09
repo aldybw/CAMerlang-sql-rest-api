@@ -1,10 +1,13 @@
 const { library } = require("../../../models/");
+const { problem_image } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const libraryIds = req.query.libraryIds || [];
   const libraryNames = req.query.libraryNames || [];
   const libraryBodyTypes = req.query.libraryBodyTypes || [];
   const libraryProblemSeverities = req.query.libraryProblemSeverities || [];
+  const libraryContentHeaders = req.query.libraryContentHeaders || [];
+  const libraryContents = req.query.libraryContents || [];
   const libraryExpertNames = req.query.libraryExpertNames || [];
   const libraryExpertSpecializations =
     req.query.libraryExpertSpecializations || [];
@@ -77,7 +80,20 @@ module.exports = async (req, res) => {
     });
   }
 
-  const mappedLibrary = getAllLibraries.map((l) => {
+  const mappedLibrary = getAllLibraries.map(async (l) => {
+    const getAllProblemImages = await problem_image.findAll({
+      where: {
+        type: l.name,
+      },
+    });
+    const mappedProblemImage = getAllProblemImages.map((p) => {
+      p = {
+        id: p.id,
+        image: p.image,
+      };
+      return p;
+    });
+
     l = {
       id: l.id,
       thumbnail: l.thumbnail,
@@ -90,6 +106,7 @@ module.exports = async (req, res) => {
       expert_name: l.expertName,
       expert_specialization: l.expertSpecialization,
       expert_verification_date: l.expertVerificationDate,
+      problem_images: mappedProblemImage,
       created_at: l.createdAt,
       updated_at: l.updatedAt,
     };

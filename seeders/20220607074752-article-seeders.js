@@ -18,7 +18,7 @@ module.exports = {
           expert_image:
             "https://storage.googleapis.com/camerlang-images-bucket/articles/expert-images/expert-1.jpg",
           expert_name: "dr. Marianti",
-          expert_specialization: "Dokter Umum",
+          expert_specialization: "Dokter Umum di RS. Cipto Kesehatan",
           expert_verification_date: "10 April 2022",
           created_at: new Date(),
           updated_at: new Date(),
@@ -36,7 +36,7 @@ module.exports = {
           expert_image:
             "https://storage.googleapis.com/camerlang-images-bucket/articles/expert-images/expert-2.jpg",
           expert_name: "dr. Merry Dame Cristy Pane",
-          expert_specialization: "Dokter Umum",
+          expert_specialization: "Dokter Umum di RSUD Sukadana",
           expert_verification_date: "24 April 2022",
           created_at: new Date(),
           updated_at: new Date(),
@@ -54,7 +54,7 @@ module.exports = {
           expert_image:
             "https://storage.googleapis.com/camerlang-images-bucket/articles/expert-images/expert-3.jpg",
           expert_name: "dr. Sienny Agustin",
-          expert_specialization: "Dokter Umum",
+          expert_specialization: "Dokter Umum di RS Merdeka Bandung",
           expert_verification_date: "29 Maret 2021",
           created_at: new Date(),
           updated_at: new Date(),
@@ -65,6 +65,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("users", null, {});
+    await queryInterface.bulkDelete("articles", null, {});
   },
 };

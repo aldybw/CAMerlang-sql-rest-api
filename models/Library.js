@@ -1,3 +1,5 @@
+const ProblemImage = require("./ProblemImage");
+
 module.exports = (sequelize, DataTypes) => {
   const Library = sequelize.define("library", {
     id: {
@@ -72,5 +74,6 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
+  // Library.hasMany(ProblemImage, { sourceKey: "name", foreignKey: "type" });
   return Library;
 };

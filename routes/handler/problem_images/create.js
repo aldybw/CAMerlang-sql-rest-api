@@ -9,6 +9,10 @@ module.exports = async (req, res) => {
       type: "string",
       empty: "false",
     },
+    type: {
+      type: "string",
+      empty: "false",
+    },
     description: {
       type: "string",
       empty: "false",
@@ -26,6 +30,7 @@ module.exports = async (req, res) => {
 
   const data = {
     image: req.body.image,
+    type: req.body.type,
     description: req.body.description,
   };
 
@@ -36,6 +41,7 @@ module.exports = async (req, res) => {
     data: {
       id: createdProblemImage.id,
       image: createdProblemImage.image,
+      type: createdProblemImage.type,
       description: createdProblemImage.description,
       created_at: createdProblemImage.createdAt,
       updated_at: createdProblemImage.updatedAt,
