@@ -9,6 +9,10 @@ module.exports = async (req, res) => {
       type: "string",
       optional: true,
     },
+    type: {
+      type: "string",
+      optional: true,
+    },
     description: {
       type: "string",
       optional: true,
@@ -33,9 +37,10 @@ module.exports = async (req, res) => {
     });
   }
 
-  const { image, description } = req.body;
+  const { image, type, description } = req.body;
   const updatedProblemImage = await getProblemImage.update({
     image,
+    type,
     description,
   });
 
@@ -44,6 +49,7 @@ module.exports = async (req, res) => {
     data: {
       id: updatedProblemImage.id,
       image: updatedProblemImage.image,
+      type: updatedProblemImage.type,
       description: updatedProblemImage.description,
       created_at: updatedProblemImage.createdAt,
       updated_at: updatedProblemImage.updatedAt,

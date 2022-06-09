@@ -1,7 +1,5 @@
-const Library = require("./Library");
-
 module.exports = (sequelize, DataTypes) => {
-  const ProblemImage = sequelize.define("problem_image", {
+  const Expert = sequelize.define("expert", {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -12,12 +10,20 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    type: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: {
+    specialization: {
       type: DataTypes.STRING,
+      allowNull: false,
+    },
+    score: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+    status: {
+      type: DataTypes.ENUM("verified", "unverified"),
       allowNull: false,
     },
     createdAt: {
@@ -32,6 +38,5 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  // ProblemImage.belongsTo(Library, { targetKey: "name", foreignKey: "type" });
-  return ProblemImage;
+  return Expert;
 };

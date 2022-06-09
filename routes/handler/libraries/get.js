@@ -1,4 +1,5 @@
 const { library } = require("../../../models/");
+const { problem_image } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const id = req.params.id;
@@ -28,24 +29,37 @@ module.exports = async (req, res) => {
     });
   }
 
-  const specifiedLibrary = {
-    id: getLibrary.id,
-    thumbnail: getLibrary.thumbnail,
-    name: getLibrary.name,
-    body_type: getLibrary.bodyType,
-    problem_severity: getLibrary.problemSeverity,
-    content_header: getLibrary.contentHeader,
-    content: getLibrary.content,
-    expert_image: getLibrary.expertImage,
-    expert_name: getLibrary.expertName,
-    expert_specialization: getLibrary.expertSpecialization,
-    expert_verification_date: getLibrary.expertVerificationDate,
-    created_at: getLibrary.createdAt,
-    updated_at: getLibrary.updatedAt,
-  };
+  const getAllProblemImages = await problem_image.findAll({
+    where: {
+      type: getLibrary.name,
+    },
+  });
+
+  const mappedProblemImage = getAllProblemImages.map((p) => {
+    p = {
+      id: p.id,
+      image: p.image,
+    };
+    return p;
+  });
 
   return res.json({
     status: "success",
-    data: specifiedLibrary,
+    data: {
+      id: getLibrary.id,
+      thumbnail: getLibrary.thumbnail,
+      name: getLibrary.name,
+      body_type: getLibrary.bodyType,
+      problem_severity: getLibrary.problemSeverity,
+      content_header: getLibrary.contentHeader,
+      content: getLibrary.content,
+      expert_image: getLibrary.expertImage,
+      expert_name: getLibrary.expertName,
+      expert_specialization: getLibrary.expertSpecialization,
+      expert_verification_date: getLibrary.expertVerificationDate,
+      problem_images: mappedProblemImage,
+      created_at: getLibrary.createdAt,
+      updated_at: getLibrary.updatedAt,
+    },
   });
 };

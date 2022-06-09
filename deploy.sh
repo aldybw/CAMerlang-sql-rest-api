@@ -1,10 +1,10 @@
-GOOGLE_PROJECT_ID=rest-api-wiht-mysql
+GOOGLE_PROJECT_ID=camerlang-development
 CLOUD_RUN_SERVICE=camerlang-api-service
-INSTANCE_CONNECTION_NAME=rest-api-wiht-mysql:us-central1:camerlang-rest-api-2
+INSTANCE_CONNECTION_NAME=camerlang-development:us-central1:camerlang-rest-api
 DB_USERNAME=root
 DB_PASSWORD=qwerty123
 DB_NAME=camerlang_db
-DB_HOSTNAME=34.67.255.29
+DB_HOSTNAME=35.226.234.192
 DB_PORT=3306
 
 gcloud builds submit --tag gcr.io/$GOOGLE_PROJECT_ID/$CLOUD_RUN_SERVICE \

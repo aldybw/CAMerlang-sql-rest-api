@@ -2,15 +2,28 @@ const { problem_image } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const problemImageIds = req.query.problemImageIds || [];
+  const problemImageTypes = req.query.problemImageTypes || [];
   const problemImageDescriptions = req.query.problemImageDescriptions || [];
 
   const sqlOptions = {
-    attributes: ["id", "image", "description", "createdAt", "updatedAt"],
+    attributes: [
+      "id",
+      "image",
+      "type",
+      "description",
+      "createdAt",
+      "updatedAt",
+    ],
   };
 
   if (problemImageIds.length) {
     sqlOptions.where = {
       id: problemImageIds,
+    };
+  }
+  if (problemImageTypes.length) {
+    sqlOptions.where = {
+      type: problemImageTypes,
     };
   }
   if (problemImageDescriptions.length) {
@@ -32,6 +45,7 @@ module.exports = async (req, res) => {
     p = {
       id: p.id,
       image: p.image,
+      type: p.type,
       description: p.description,
       created_at: p.createdAt,
       updated_at: p.updatedAt,
