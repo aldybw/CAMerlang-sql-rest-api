@@ -35,6 +35,10 @@
     {
       "name": "Notifications",
       "description": "API for Notifications"
+    },
+    {
+      "name": "Experts",
+      "description": "API for Experts"
     }
   ],
   "paths": {
@@ -750,7 +754,7 @@
         }
       }
     },
-"/notification_categories/{id}": {
+    "/notification_categories/{id}": {
       "get": {
         "tags": ["Notification Categories"],
         "summary": "Get a Notification Category",
@@ -892,7 +896,7 @@
         }
       }
     },
-"/notifications/{id}": {
+    "/notifications/{id}": {
       "get": {
         "tags": ["Notifications"],
         "summary": "Get a Notification",
@@ -982,6 +986,168 @@
           },
           "404": {
             "description": "Notification Not Found"
+          }
+        }
+      }
+    },
+    "/experts": {
+      "get": {
+        "tags": ["Experts"],
+        "summary": "Get All Experts",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Experts Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Experts"],
+        "summary": "Post an Expert",
+        "consumes": "multipart/form-data",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "empty": "false"
+                  },
+                  "name": {
+                    "type": "string",
+                    "empty": "false"
+                  },
+                  "specialization": {
+                    "type": "string",
+                    "empty": "false"
+                  },
+                  "score": {
+                    "type": "number",
+                    "empty": "false"
+                  },
+                  "status": {
+                    "type": "string",
+                    "empty": "false",
+                    "values": ["verified", "unverified"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "success"
+          },
+          "404": {
+            "description": "Can't Post a Expert"
+          }
+        }
+      }
+    },
+    "/experts/{id}": {
+      "get": {
+        "tags": ["Experts"],
+        "summary": "Get an Expert",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID Experts"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Expert Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Experts"],
+        "summary": "Update a Expert",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID Experts"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "empty": "false"
+                  },
+                  "name": {
+                    "type": "string",
+                    "empty": "false"
+                  },
+                  "specialization": {
+                    "type": "string",
+                    "empty": "false"
+                  },
+                  "score": {
+                    "type": "number",
+                    "empty": "false"
+                  },
+                  "status": {
+                    "type": "string",
+                    "empty": "false",
+                    "values": ["verified", "unverified"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Notification Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Experts"],
+        "summary": "Delete an Expert",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID Experts"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Expert Not Found"
           }
         }
       }
