@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
+const verifyToken = require("../middleware/verifiyToken");
+
 const notificationsHandler = require("./handler/notifications");
 
 router.get("/", notificationsHandler.getAll);
 router.get("/:id", notificationsHandler.get);
-router.post("/", notificationsHandler.create);
-router.put("/:id", notificationsHandler.update);
-router.delete("/:id", notificationsHandler.destroy);
+router.post("/", verifyToken, notificationsHandler.create);
+router.put("/:id", verifyToken, notificationsHandler.update);
+router.delete("/:id", verifyToken, notificationsHandler.destroy);
 
 module.exports = router;

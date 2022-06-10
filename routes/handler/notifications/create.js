@@ -1,7 +1,7 @@
 const Validator = require("fastest-validator");
 const v = new Validator();
 
-const { notification } = require("../../../models/");
+const { Notification } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const schema = {
@@ -35,7 +35,7 @@ module.exports = async (req, res) => {
     messageContent: req.body.messageContent,
   };
 
-  const createdNotification = await notification.create(data);
+  const createdNotification = await Notification.create(data);
 
   return res.json({
     status: "success",

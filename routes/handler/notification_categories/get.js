@@ -1,13 +1,13 @@
-const { notification_category } = require("../../../models/");
+const { NotificationCategory } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const id = req.params.id;
 
-  const getNotificationCategory = await notification_category.findByPk(id, {
+  const notificationCategory = await NotificationCategory.findByPk(id, {
     attributes: ["id", "name", "description", "createdAt", "updatedAt"],
   });
 
-  if (!getNotificationCategory) {
+  if (!notificationCategory) {
     return res.status(404).json({
       status: "error",
       message: "notification category not found",
@@ -15,11 +15,11 @@ module.exports = async (req, res) => {
   }
 
   const specifiedNotificationCategory = {
-    id: getNotificationCategory.id,
-    name: getNotificationCategory.name,
-    description: getNotificationCategory.description,
-    created_at: getNotificationCategory.createdAt,
-    updated_at: getNotificationCategory.updatedAt,
+    id: notificationCategory.id,
+    name: notificationCategory.name,
+    description: notificationCategory.description,
+    created_at: notificationCategory.createdAt,
+    updated_at: notificationCategory.updatedAt,
   };
 
   return res.json({

@@ -1,7 +1,7 @@
 const Validator = require("fastest-validator");
 const v = new Validator();
 
-const { library } = require("../../../models/");
+const { Library } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const schema = {
@@ -58,8 +58,8 @@ module.exports = async (req, res) => {
   }
 
   const id = req.params.id;
-  const getLibrary = await library.findByPk(id);
-  if (!getLibrary) {
+  const library = await Library.findByPk(id);
+  if (!library) {
     return res.status(404).json({
       status: "error",
       message: "library not found",
@@ -79,7 +79,7 @@ module.exports = async (req, res) => {
     expertVerificationDate,
   } = req.body;
 
-  const updatedLibrary = await getLibrary.update({
+  const updatedLibrary = await library.update({
     thumbnail,
     name,
     bodyType,

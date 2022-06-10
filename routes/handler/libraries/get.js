@@ -1,10 +1,9 @@
-const { library } = require("../../../models/");
-const { problem_image } = require("../../../models/");
+const { Library, ProblemImage } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const id = req.params.id;
 
-  const getLibrary = await library.findByPk(id, {
+  const library = await Library.findByPk(id, {
     attributes: [
       "id",
       "thumbnail",
@@ -22,20 +21,20 @@ module.exports = async (req, res) => {
     ],
   });
 
-  if (!getLibrary) {
+  if (!library) {
     return res.status(404).json({
       status: "error",
       message: "library not found",
     });
   }
 
-  const getAllProblemImages = await problem_image.findAll({
+  const problemImages = await ProblemImage.findAll({
     where: {
-      type: getLibrary.name,
+      type: library.name,
     },
   });
 
-  const mappedProblemImage = getAllProblemImages.map((p) => {
+  const mappedProblemImage = problemImages.map((p) => {
     p = {
       id: p.id,
       image: p.image,
@@ -46,20 +45,20 @@ module.exports = async (req, res) => {
   return res.json({
     status: "success",
     data: {
-      id: getLibrary.id,
-      thumbnail: getLibrary.thumbnail,
-      name: getLibrary.name,
-      body_type: getLibrary.bodyType,
-      problem_severity: getLibrary.problemSeverity,
-      content_header: getLibrary.contentHeader,
-      content: getLibrary.content,
-      expert_image: getLibrary.expertImage,
-      expert_name: getLibrary.expertName,
-      expert_specialization: getLibrary.expertSpecialization,
-      expert_verification_date: getLibrary.expertVerificationDate,
+      id: library.id,
+      thumbnail: library.thumbnail,
+      name: library.name,
+      body_type: library.bodyType,
+      problem_severity: library.problemSeverity,
+      content_header: library.contentHeader,
+      content: library.content,
+      expert_image: library.expertImage,
+      expert_name: library.expertName,
+      expert_specialization: library.expertSpecialization,
+      expert_verification_date: library.expertVerificationDate,
       problem_images: mappedProblemImage,
-      created_at: getLibrary.createdAt,
-      updated_at: getLibrary.updatedAt,
+      created_at: library.createdAt,
+      updated_at: library.updatedAt,
     },
   });
 };

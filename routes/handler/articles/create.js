@@ -1,7 +1,7 @@
 const Validator = require("fastest-validator");
 const v = new Validator();
 
-const { article } = require("../../../models/");
+const { Article } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const schema = {
@@ -70,7 +70,7 @@ module.exports = async (req, res) => {
     expertVerificationDate: req.body.expertVerificationDate,
   };
 
-  const createdArticle = await article.create(data);
+  const createdArticle = await Article.create(data);
 
   return res.json({
     status: "success",

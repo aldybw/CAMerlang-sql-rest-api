@@ -1,7 +1,7 @@
 const Validator = require("fastest-validator");
 const v = new Validator();
 
-const { skincare_product } = require("../../../models/");
+const { SkincareProduct } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const schema = {
@@ -39,18 +39,18 @@ module.exports = async (req, res) => {
     isPopular: req.body.isPopular,
   };
 
-  const createdSkincareProducts = await skincare_product.create(data);
+  const createdSkincareProduct = await SkincareProduct.create(data);
 
   return res.json({
     status: "success",
     data: {
-      id: createdSkincareProducts.id,
-      image: createdSkincareProducts.image,
-      name: createdSkincareProducts.name,
-      brand: createdSkincareProducts.brand,
-      is_popular: createdSkincareProducts.isPopular,
-      created_at: createdSkincareProducts.createdAt,
-      updated_at: createdSkincareProducts.updatedAt,
+      id: createdSkincareProduct.id,
+      image: createdSkincareProduct.image,
+      name: createdSkincareProduct.name,
+      brand: createdSkincareProduct.brand,
+      is_popular: createdSkincareProduct.isPopular,
+      created_at: createdSkincareProduct.createdAt,
+      updated_at: createdSkincareProduct.updatedAt,
     },
   });
 };

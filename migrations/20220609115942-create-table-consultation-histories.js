@@ -1,9 +1,9 @@
 "use strict";
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  async up(queryInterface, Sequelize) {
     // logic for transforming into the new state
-    return queryInterface.createTable("problem_images", {
+    await queryInterface.createTable("consultation_histories", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -14,13 +14,17 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      type: {
+      code: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      description: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      acne_result: {
+        type: Sequelize.FLOAT,
+        allowNull: true,
+      },
+      comedo_result: {
+        type: Sequelize.FLOAT,
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -32,8 +36,8 @@ module.exports = {
       },
     });
   },
-  down: (queryInterface, Sequelize) => {
+  async down(queryInterface, Sequelize) {
     // logic for reverting the changes
-    return queryInterface.dropTable("problem_images");
+    await queryInterface.dropTable("consultation_histories");
   },
 };

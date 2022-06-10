@@ -1,4 +1,4 @@
-const { article } = require("../../../models/");
+const { Article } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const articleIds = req.query.articleIds || [];
@@ -70,16 +70,16 @@ module.exports = async (req, res) => {
     };
   }
 
-  const getAllArticles = await article.findAll(sqlOptions);
+  const articles = await Article.findAll(sqlOptions);
 
-  if (getAllArticles.length === 0) {
+  if (articles.length === 0) {
     return res.json({
       status: "success",
-      message: "There is no articles data",
+      message: "There is no article data",
     });
   }
 
-  const mappedArticle = getAllArticles.map((a) => {
+  const mappedArticle = articles.map((a) => {
     a = {
       id: a.id,
       thumbnail: a.thumbnail,

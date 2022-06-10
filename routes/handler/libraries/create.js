@@ -1,7 +1,7 @@
 const Validator = require("fastest-validator");
 const v = new Validator();
 
-const { library } = require("../../../models/");
+const { Library } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const schema = {
@@ -70,7 +70,7 @@ module.exports = async (req, res) => {
     expertVerificationDate: req.body.expertVerificationDate,
   };
 
-  const createdLibrary = await library.create(data);
+  const createdLibrary = await Library.create(data);
 
   return res.json({
     status: "success",

@@ -1,25 +1,21 @@
 "use strict";
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  async up(queryInterface, Sequelize) {
     // logic for transforming into the new state
-    return queryInterface.createTable("notifications", {
+    await queryInterface.createTable("notification_categories", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-      type: {
+      name: {
         type: Sequelize.ENUM("general", "tips", "reminder"),
         allowNull: false,
       },
-      message_header: {
+      description: {
         type: Sequelize.STRING,
-        allowNull: false,
-      },
-      message_content: {
-        type: Sequelize.TEXT,
         allowNull: false,
       },
       created_at: {
@@ -32,8 +28,8 @@ module.exports = {
       },
     });
   },
-  down: (queryInterface, Sequelize) => {
+  async down(queryInterface, Sequelize) {
     // logic for reverting the changes
-    return queryInterface.dropTable("notifications");
+    await queryInterface.dropTable("notification_categories");
   },
 };

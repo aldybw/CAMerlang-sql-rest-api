@@ -1,7 +1,7 @@
 const Validator = require("fastest-validator");
 const v = new Validator();
 
-const { skincare_product } = require("../../../models/");
+const { SkincareProduct } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const schema = {
@@ -33,8 +33,8 @@ module.exports = async (req, res) => {
   }
 
   const id = req.params.id;
-  const getSkincareProduct = await skincare_product.findByPk(id);
-  if (!getSkincareProduct) {
+  const skincareProduct = await SkincareProduct.findByPk(id);
+  if (!skincareProduct) {
     return res.status(404).json({
       status: "error",
       message: "skincare product not found",
@@ -43,7 +43,7 @@ module.exports = async (req, res) => {
 
   const { image, name, brand, isPopular } = req.body;
 
-  const updatedSkincareProduct = await getSkincareProduct.update({
+  const updatedSkincareProduct = await skincareProduct.update({
     image,
     name,
     brand,

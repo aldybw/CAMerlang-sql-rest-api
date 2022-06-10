@@ -1,7 +1,7 @@
 const Validator = require("fastest-validator");
 const v = new Validator();
 
-const { problem_image } = require("../../../models/");
+const { ProblemImage } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const schema = {
@@ -29,8 +29,8 @@ module.exports = async (req, res) => {
   }
 
   const id = req.params.id;
-  const getProblemImage = await problem_image.findByPk(id);
-  if (!getProblemImage) {
+  const problemImage = await ProblemImage.findByPk(id);
+  if (!problemImage) {
     return res.status(404).json({
       status: "error",
       message: "problem image not found",
@@ -38,7 +38,7 @@ module.exports = async (req, res) => {
   }
 
   const { image, type, description } = req.body;
-  const updatedProblemImage = await getProblemImage.update({
+  const updatedProblemImage = await problemImage.update({
     image,
     type,
     description,

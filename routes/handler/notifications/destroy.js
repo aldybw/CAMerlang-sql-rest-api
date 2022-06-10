@@ -1,17 +1,17 @@
-const { notification } = require("../../../models/");
+const { Notification } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const id = req.params.id;
 
-  const getNotification = await notification.findByPk(id);
+  const notification = await Notification.findByPk(id);
 
-  if (!getNotification) {
+  if (!notification) {
     return res
       .status(404)
       .json({ status: "error", message: "notification not found" });
   }
 
-  await getNotification.destroy();
+  await notification.destroy();
 
   return res.json({
     status: "success",

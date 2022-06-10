@@ -1,17 +1,17 @@
-const { article } = require("../../../models/");
+const { Article } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const id = req.params.id;
 
-  const getArticle = await article.findByPk(id);
+  const article = await Article.findByPk(id);
 
-  if (!getArticle) {
+  if (!article) {
     return res
       .status(404)
       .json({ status: "error", message: "article not found" });
   }
 
-  await getArticle.destroy();
+  await article.destroy();
 
   return res.json({
     status: "success",

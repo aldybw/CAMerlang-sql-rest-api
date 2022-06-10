@@ -1,7 +1,7 @@
 const Validator = require("fastest-validator");
 const v = new Validator();
 
-const { notification_category } = require("../../../models/");
+const { NotificationCategory } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const schema = {
@@ -26,8 +26,8 @@ module.exports = async (req, res) => {
   }
 
   const id = req.params.id;
-  const getNotificationCategory = await notification_category.findByPk(id);
-  if (!getNotificationCategory) {
+  const notificationCategory = await NotificationCategory.findByPk(id);
+  if (!notificationCategory) {
     return res.status(404).json({
       status: "error",
       message: "notification category not found",
@@ -35,7 +35,7 @@ module.exports = async (req, res) => {
   }
 
   const { name, description } = req.body;
-  const updatedNotificationCategory = await getNotificationCategory.update({
+  const updatedNotificationCategory = await notificationCategory.update({
     name,
     description,
   });

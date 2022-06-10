@@ -1,7 +1,7 @@
 const Validator = require("fastest-validator");
 const v = new Validator();
 
-const { notification } = require("../../../models/");
+const { Notification } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const schema = {
@@ -30,8 +30,8 @@ module.exports = async (req, res) => {
   }
 
   const id = req.params.id;
-  const getNotification = await notification.findByPk(id);
-  if (!getNotification) {
+  const notification = await Notification.findByPk(id);
+  if (!notification) {
     return res.status(404).json({
       status: "error",
       message: "notification not found",
@@ -39,7 +39,7 @@ module.exports = async (req, res) => {
   }
 
   const { type, messageHeader, messageContent } = req.body;
-  const updatedNotification = await getNotification.update({
+  const updatedNotification = await notification.update({
     type,
     messageHeader,
     messageContent,

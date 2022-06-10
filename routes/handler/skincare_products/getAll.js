@@ -1,4 +1,4 @@
-const { skincare_product } = require("../../../models/");
+const { SkincareProduct } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const skincareProductIds = req.query.skincareProductIds || [];
@@ -27,16 +27,16 @@ module.exports = async (req, res) => {
     };
   }
 
-  const getAllSkincareProducts = await skincare_product.findAll(sqlOptions);
+  const skincareProducts = await SkincareProduct.findAll(sqlOptions);
 
-  if (getAllSkincareProducts.length === 0) {
+  if (skincareProducts.length === 0) {
     return res.json({
       status: "success",
-      message: "There is no skincare products data",
+      message: "There is no skincare product data",
     });
   }
 
-  const mappedSkincareProduct = getAllSkincareProducts.map((s) => {
+  const mappedSkincareProduct = skincareProducts.map((s) => {
     s = {
       id: s.id,
       image: s.image,

@@ -1,5 +1,4 @@
-const { library } = require("../../../models/");
-const { problem_image } = require("../../../models/");
+const { Library } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const libraryIds = req.query.libraryIds || [];
@@ -71,29 +70,16 @@ module.exports = async (req, res) => {
     };
   }
 
-  const getAllLibraries = await library.findAll(sqlOptions);
+  const libraries = await Library.findAll(sqlOptions);
 
-  if (getAllLibraries.length === 0) {
+  if (libraries.length === 0) {
     return res.json({
       status: "success",
       message: "There is no libraries data",
     });
   }
 
-  const mappedLibrary = getAllLibraries.map(async (l) => {
-    const getAllProblemImages = await problem_image.findAll({
-      where: {
-        type: l.name,
-      },
-    });
-    const mappedProblemImage = getAllProblemImages.map((p) => {
-      p = {
-        id: p.id,
-        image: p.image,
-      };
-      return p;
-    });
-
+  const mappedLibrary = libraries.map((l) => {
     l = {
       id: l.id,
       thumbnail: l.thumbnail,
@@ -106,7 +92,6 @@ module.exports = async (req, res) => {
       expert_name: l.expertName,
       expert_specialization: l.expertSpecialization,
       expert_verification_date: l.expertVerificationDate,
-      problem_images: mappedProblemImage,
       created_at: l.createdAt,
       updated_at: l.updatedAt,
     };

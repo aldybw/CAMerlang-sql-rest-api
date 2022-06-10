@@ -1,4 +1,4 @@
-const { expert } = require("../../../models/");
+const { Expert } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const expertIds = req.query.expertIds || [];
@@ -46,16 +46,16 @@ module.exports = async (req, res) => {
     };
   }
 
-  const getAllExperts = await expert.findAll(sqlOptions);
+  const experts = await Expert.findAll(sqlOptions);
 
-  if (getAllExperts.length === 0) {
+  if (experts.length === 0) {
     return res.json({
       status: "success",
-      message: "There is no experts data",
+      message: "There is no expert data",
     });
   }
 
-  const mappedExpert = getAllExperts.map((e) => {
+  const mappedExpert = experts.map((e) => {
     e = {
       id: e.id,
       image: e.image,

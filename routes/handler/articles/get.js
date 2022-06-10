@@ -1,9 +1,9 @@
-const { article } = require("../../../models/");
+const { Article } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const id = req.params.id;
 
-  const getArticle = await article.findByPk(id, {
+  const article = await Article.findByPk(id, {
     attributes: [
       "id",
       "thumbnail",
@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
     ],
   });
 
-  if (!getArticle) {
+  if (!article) {
     return res.status(404).json({
       status: "error",
       message: "article not found",
@@ -29,19 +29,19 @@ module.exports = async (req, res) => {
   }
 
   const specifiedArticle = {
-    id: getArticle.id,
-    thumbnail: getArticle.thumbnail,
-    title: getArticle.title,
-    type: getArticle.type,
-    read_duration: getArticle.readDuration,
-    content_header: getArticle.contentHeader,
-    content: getArticle.content,
-    expert_image: getArticle.expertImage,
-    expert_name: getArticle.expertName,
-    expert_specialization: getArticle.expertSpecialization,
-    expert_verification_date: getArticle.expertVerificationDate,
-    created_at: getArticle.createdAt,
-    updated_at: getArticle.updatedAt,
+    id: article.id,
+    thumbnail: article.thumbnail,
+    title: article.title,
+    type: article.type,
+    read_duration: article.readDuration,
+    content_header: article.contentHeader,
+    content: article.content,
+    expert_image: article.expertImage,
+    expert_name: article.expertName,
+    expert_specialization: article.expertSpecialization,
+    expert_verification_date: article.expertVerificationDate,
+    created_at: article.createdAt,
+    updated_at: article.updatedAt,
   };
 
   return res.json({

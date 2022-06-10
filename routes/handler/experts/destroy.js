@@ -1,17 +1,17 @@
-const { expert } = require("../../../models/");
+const { Expert } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const id = req.params.id;
 
-  const getExpert = await expert.findByPk(id);
+  const expert = await Expert.findByPk(id);
 
-  if (!getExpert) {
+  if (!expert) {
     return res
       .status(404)
       .json({ status: "error", message: "expert not found" });
   }
 
-  await getExpert.destroy();
+  await expert.destroy();
 
   return res.json({
     status: "success",

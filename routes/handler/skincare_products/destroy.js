@@ -1,17 +1,17 @@
-const { skincare_product } = require("../../../models/");
+const { SkincareProduct } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const id = req.params.id;
 
-  const getSkincareProduct = await skincare_product.findByPk(id);
+  const skincareProduct = await SkincareProduct.findByPk(id);
 
-  if (!getSkincareProduct) {
+  if (!skincareProduct) {
     return res
       .status(404)
       .json({ status: "error", message: "skincare product not found" });
   }
 
-  await getSkincareProduct.destroy();
+  await skincareProduct.destroy();
 
   return res.json({
     status: "success",

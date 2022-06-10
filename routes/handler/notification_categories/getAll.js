@@ -1,4 +1,4 @@
-const { notification_category } = require("../../../models/");
+const { NotificationCategory } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const notificationCategoryIds = req.query.notificationCategoryIds || [];
@@ -26,18 +26,16 @@ module.exports = async (req, res) => {
     };
   }
 
-  const getAllNotificationCategories = await notification_category.findAll(
-    sqlOptions
-  );
+  const notificationCategories = await NotificationCategory.findAll(sqlOptions);
 
-  if (getAllNotificationCategories.length === 0) {
+  if (notificationCategories.length === 0) {
     return res.json({
       status: "success",
-      message: "There is no notification categories data",
+      message: "There is no notification category data",
     });
   }
 
-  const mappedNotificationCategory = getAllNotificationCategories.map((n) => {
+  const mappedNotificationCategory = notificationCategories.map((n) => {
     n = {
       id: n.id,
       name: n.name,

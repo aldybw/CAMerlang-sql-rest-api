@@ -1,9 +1,9 @@
-const { skincare_product } = require("../../../models/");
+const { SkincareProduct } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const id = req.params.id;
 
-  const getSkincareProduct = await skincare_product.findByPk(id, {
+  const skincareProduct = await SkincareProduct.findByPk(id, {
     attributes: [
       "id",
       "image",
@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
     ],
   });
 
-  if (!getSkincareProduct) {
+  if (!skincareProduct) {
     return res.status(404).json({
       status: "error",
       message: "skincare product not found",
@@ -23,13 +23,13 @@ module.exports = async (req, res) => {
   }
 
   const specifiedSkincareProduct = {
-    id: getSkincareProduct.id,
-    image: getSkincareProduct.image,
-    name: getSkincareProduct.name,
-    brand: getSkincareProduct.brand,
-    is_popular: getSkincareProduct.isPopular,
-    created_at: getSkincareProduct.createdAt,
-    updated_at: getSkincareProduct.updatedAt,
+    id: skincareProduct.id,
+    image: skincareProduct.image,
+    name: skincareProduct.name,
+    brand: skincareProduct.brand,
+    is_popular: skincareProduct.isPopular,
+    created_at: skincareProduct.createdAt,
+    updated_at: skincareProduct.updatedAt,
   };
 
   return res.json({

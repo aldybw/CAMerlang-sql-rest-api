@@ -1,7 +1,7 @@
 const Validator = require("fastest-validator");
 const v = new Validator();
 
-const { article } = require("../../../models/");
+const { Article } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const schema = {
@@ -58,8 +58,8 @@ module.exports = async (req, res) => {
   }
 
   const id = req.params.id;
-  const getArticle = await article.findByPk(id);
-  if (!getArticle) {
+  const article = await Article.findByPk(id);
+  if (!article) {
     return res.status(404).json({
       status: "error",
       message: "article not found",
@@ -79,7 +79,7 @@ module.exports = async (req, res) => {
     expertVerificationDate,
   } = req.body;
 
-  const updatedArticle = await getArticle.update({
+  const updatedArticle = await article.update({
     thumbnail,
     title,
     type,

@@ -1,7 +1,7 @@
 const Validator = require("fastest-validator");
 const v = new Validator();
 
-const { article } = require("../../../models");
+const { Expert } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const schema = {
@@ -38,17 +38,17 @@ module.exports = async (req, res) => {
   }
 
   const id = req.params.id;
-  const getArticle = await article.findByPk(id);
-  if (!getArticle) {
+  const expert = await Expert.findByPk(id);
+  if (!expert) {
     return res.status(404).json({
       status: "error",
-      message: "article not found",
+      message: "expert not found",
     });
   }
 
   const { image, name, specialization, score, status } = req.body;
 
-  const updatedArticle = await getArticle.update({
+  const updatedExpert = await expert.update({
     image,
     name,
     specialization,
@@ -59,14 +59,14 @@ module.exports = async (req, res) => {
   return res.json({
     status: "success",
     data: {
-      id: updatedArticle.id,
-      image: updatedArticle.image,
-      name: updatedArticle.name,
-      specialization: updatedArticle.specialization,
-      score: updatedArticle.score,
-      status: updatedArticle.status,
-      created_at: updatedArticle.createdAt,
-      updated_at: updatedArticle.updatedAt,
+      id: updatedExpert.id,
+      image: updatedExpert.image,
+      name: updatedExpert.name,
+      specialization: updatedExpert.specialization,
+      score: updatedExpert.score,
+      status: updatedExpert.status,
+      created_at: updatedExpert.createdAt,
+      updated_at: updatedExpert.updatedAt,
     },
   });
 };

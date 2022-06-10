@@ -1,4 +1,4 @@
-const { problem_image } = require("../../../models/");
+const { ProblemImage } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const problemImageIds = req.query.problemImageIds || [];
@@ -32,16 +32,16 @@ module.exports = async (req, res) => {
     };
   }
 
-  const getAllProblemImages = await problem_image.findAll(sqlOptions);
+  const problemImages = await ProblemImage.findAll(sqlOptions);
 
-  if (getAllProblemImages.length === 0) {
+  if (problemImages.length === 0) {
     return res.json({
       status: "success",
-      message: "There is no problem images data",
+      message: "There is no problem image data",
     });
   }
 
-  const mappedProblemImage = getAllProblemImages.map((p) => {
+  const mappedProblemImage = problemImages.map((p) => {
     p = {
       id: p.id,
       image: p.image,

@@ -1,9 +1,9 @@
-const { notification } = require("../../../models/");
+const { Notification } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const id = req.params.id;
 
-  const getNotification = await notification.findByPk(id, {
+  const notification = await Notification.findByPk(id, {
     attributes: [
       "id",
       "type",
@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
     ],
   });
 
-  if (!getNotification) {
+  if (!notification) {
     return res.status(404).json({
       status: "error",
       message: "notification not found",
@@ -22,12 +22,12 @@ module.exports = async (req, res) => {
   }
 
   const specifiedNotification = {
-    id: getNotification.id,
-    type: getNotification.type,
-    message_header: getNotification.messageHeader,
-    message_content: getNotification.messageContent,
-    created_at: getNotification.createdAt,
-    updated_at: getNotification.updatedAt,
+    id: notification.id,
+    type: notification.type,
+    message_header: notification.messageHeader,
+    message_content: notification.messageContent,
+    created_at: notification.createdAt,
+    updated_at: notification.updatedAt,
   };
 
   return res.json({

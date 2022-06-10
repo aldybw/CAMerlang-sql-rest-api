@@ -1,9 +1,9 @@
 "use strict";
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  async up(queryInterface, Sequelize) {
     // logic for transforming into the new state
-    return queryInterface.createTable("articles", {
+    await queryInterface.createTable("articles", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -60,8 +60,8 @@ module.exports = {
       },
     });
   },
-  down: (queryInterface, Sequelize) => {
+  async down(queryInterface, Sequelize) {
     // logic for reverting the changes
-    return queryInterface.dropTable("articles");
+    await queryInterface.dropTable("articles");
   },
 };

@@ -1,17 +1,17 @@
-const { library } = require("../../../models/");
+const { Library } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const id = req.params.id;
 
-  const getLibrary = await library.findByPk(id);
+  const library = await Library.findByPk(id);
 
-  if (!getLibrary) {
+  if (!library) {
     return res
       .status(404)
       .json({ status: "error", message: "library not found" });
   }
 
-  await getLibrary.destroy();
+  await library.destroy();
 
   return res.json({
     status: "success",

@@ -1,7 +1,7 @@
 const Validator = require("fastest-validator");
 const v = new Validator();
 
-const { problem_image } = require("../../../models/");
+const { ProblemImage } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const schema = {
@@ -34,7 +34,7 @@ module.exports = async (req, res) => {
     description: req.body.description,
   };
 
-  const createdProblemImage = await problem_image.create(data);
+  const createdProblemImage = await ProblemImage.create(data);
 
   return res.json({
     status: "success",

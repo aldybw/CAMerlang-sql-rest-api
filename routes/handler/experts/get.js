@@ -1,9 +1,9 @@
-const { expert } = require("../../../models/");
+const { Expert } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const id = req.params.id;
 
-  const getExpert = await expert.findByPk(id, {
+  const expert = await Expert.findByPk(id, {
     attributes: [
       "id",
       "image",
@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
     ],
   });
 
-  if (!getExpert) {
+  if (!expert) {
     return res.status(404).json({
       status: "error",
       message: "expert not found",
@@ -24,14 +24,14 @@ module.exports = async (req, res) => {
   }
 
   const specifiedExpert = {
-    id: getExpert.id,
-    image: getExpert.image,
-    name: getExpert.name,
-    specialization: getExpert.specialization,
-    score: getExpert.score,
-    status: getExpert.status,
-    created_at: getExpert.createdAt,
-    updated_at: getExpert.updatedAt,
+    id: expert.id,
+    image: expert.image,
+    name: expert.name,
+    specialization: expert.specialization,
+    score: expert.score,
+    status: expert.status,
+    created_at: expert.createdAt,
+    updated_at: expert.updatedAt,
   };
 
   return res.json({

@@ -1,4 +1,4 @@
-const { notification } = require("../../../models/");
+const { Notification } = require("../../../models/");
 
 module.exports = async (req, res) => {
   const notificationIds = req.query.notificationIds || [];
@@ -39,16 +39,16 @@ module.exports = async (req, res) => {
     };
   }
 
-  const getAllNotifications = await notification.findAll(sqlOptions);
+  const notifications = await Notification.findAll(sqlOptions);
 
-  if (getAllNotifications.length === 0) {
+  if (notifications.length === 0) {
     return res.json({
       status: "success",
       message: "There is no notification data",
     });
   }
 
-  const mappedNotification = getAllNotifications.map((n) => {
+  const mappedNotification = notifications.map((n) => {
     n = {
       id: n.id,
       type: n.type,
