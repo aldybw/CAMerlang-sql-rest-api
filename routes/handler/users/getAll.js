@@ -70,10 +70,12 @@ module.exports = async (req, res) => {
   const mappedUser = users.map((u) => {
     u = {
       id: u.id,
-      image: u.image,
       name: u.name,
-      brand: u.brand,
-      is_popular: u.isPopular,
+      age: u.age,
+      profession: u.profession,
+      current_status: u.currentStatus,
+      role: u.role,
+      email: u.email,
       created_at: u.createdAt,
       updated_at: u.updatedAt,
     };
