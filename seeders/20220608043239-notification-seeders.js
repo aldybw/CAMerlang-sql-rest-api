@@ -17,7 +17,7 @@ module.exports = {
           type: "tips",
           message_header: "Don't forget to apply your treatment product.",
           message_content:
-            "You have passed two days of yourdetermined treatment product usage. Please use it to minimalize your concern.",
+            "You have passed two days of your determined treatment product usage. Please use it to minimalize your concern.",
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -25,7 +25,7 @@ module.exports = {
           type: "reminder",
           message_header: "Don't forget to apply your treatment product.",
           message_content:
-            "You have passed two days of yourdetermined treatment product usage. Please use it to minimalize your concern.",
+            "You have passed two days of your determined treatment product usage. Please use it to minimalize your concern.",
           created_at: new Date(),
           updated_at: new Date(),
         },

@@ -1,14 +1,19 @@
-const { User, RefreshToken } = require("../../../models");
+const jwt = require("jsonwebtoken");
 const Validator = require("fastest-validator");
 const v = new Validator();
 
+const { JWT_SECRET, JWT_SECRET_REFRESH_TOKEN, JWT_ACCESS_TOKEN_EXPIRED } =
+  process.env;
+
+const { RefreshToken } = require("../../../models");
+
 module.exports = async (req, res) => {
-  const userId = req.body.userId;
   const refreshToken = req.body.refreshToken;
+  const email = req.body.email;
 
   const schema = {
-    userId: "string",
-    refreshToken: "number",
+    refreshToken: "string",
+    email: "email",
   };
 
   const validate = v.validate(req.body, schema);
@@ -19,23 +24,41 @@ module.exports = async (req, res) => {
     });
   }
 
-  const user = await User.findByPk(userId);
-  if (!user) {
-    return res.status(404).json({
+  const token = await RefreshToken.findOne({
+    where: { token: refreshToken },
+  });
+
+  if (!token || !email) {
+    return res.status(400).json({
       status: "error",
-      message: "user not found",
+      message: "invalid token",
     });
   }
 
-  const createdRefreshToken = await RefreshToken.create({
-    token: refreshToken,
-    user_id: userId,
-  });
+  jwt.verify(refreshToken, JWT_SECRET_REFRESH_TOKEN, (err, decoded) => {
+    if (err) {
+      return res.status(403).json({
+        status: "error",
+        message: err.message,
+      });
+    }
 
-  return res.json({
-    status: "success",
-    data: {
-      id: createdRefreshToken.id,
-    },
+    if (email !== decoded.data.email) {
+      return res.status(400).json({
+        status: "error",
+        message: "email is not valid",
+      });
+    }
+
+    const newToken = jwt.sign({ data: decoded.data }, JWT_SECRET, {
+      expiresIn: JWT_ACCESS_TOKEN_EXPIRED,
+    });
+    return res.json({
+      status: "success",
+      data: {
+        refreshToken,
+        newToken,
+      },
+    });
   });
 };
