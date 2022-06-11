@@ -598,6 +598,10 @@
                     "type": "string",
                     "empty": "false"
                   },
+                  "type": {
+                    "type": "string",
+                    "empty": "false"
+                  },
                   "description": {
                     "type": "string",
                     "empty": "false"
@@ -662,6 +666,10 @@
                 "type": "object",
                 "properties": {
                   "image": {
+                    "type": "string",
+                    "empty": "false"
+                  },
+                  "type": {
                     "type": "string",
                     "empty": "false"
                   },
