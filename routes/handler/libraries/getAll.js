@@ -27,6 +27,7 @@ module.exports = async (req, res) => {
       "createdAt",
       "updatedAt",
     ],
+    order: [["name", "ASC"]],
   };
 
   if (libraryIds.length) {
