@@ -9,3 +9,11 @@ An quick &amp; efficient skin detection, diagnosis, and consultation application
 Currently in development. Stay tuned in this repository for more information.
 
 ## Here's the steps how you can replicate this project
+
+\#Clone this project<br>
+
+### git clone https://github.com/aldybw/CAMerlang-sql-rest-api
+
+
+
+###
