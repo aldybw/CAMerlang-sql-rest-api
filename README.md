@@ -10,10 +10,12 @@ Currently in development. Stay tuned in this repository for more information.
 
 ## Here's the steps how you can replicate this project
 
-\#Clone this project<br>
+1. Clone this project
 
-### git clone https://github.com/aldybw/CAMerlang-sql-rest-api
+> git clone https://github.com/aldybw/CAMerlang-sql-rest-api
 
+2. Install some packages
 
+> npm install
 
 ###
