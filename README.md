@@ -96,8 +96,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Aldy - [GitHub](https://github.com/aldybw), [Linkdn](https://www.linkedin.com/in/aldycky-bagus-witjaksana-4969441b0/)
-Tomi - [GitHub](https://github.com/kurak57), [Linkdn](https://www.linkedin.com/mwlite/in/tomi-timutius-31b1ba137)
+Aldy - [GitHub](https://github.com/aldybw), [LinkedIn](https://www.linkedin.com/in/aldycky-bagus-witjaksana-4969441b0/)
+Tomi - [GitHub](https://github.com/kurak57), [LinkedIn](https://www.linkedin.com/mwlite/in/tomi-timutius-31b1ba137)
 
 Project Link: [https://github.com/aldybw/CAMerlang-sql-rest-api.git]([https://github.com/your_username/repo_name](https://github.com/aldybw/CAMerlang-sql-rest-api.git))
 
