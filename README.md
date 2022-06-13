@@ -19,29 +19,11 @@ As the we mentioned before, this repository is used as the primary working repos
 
 ### This application built with
 
-A. Framework/Libraries
 * [Express JS](https://expressjs.com/)
 * [Sequelize](https://sequelize.org/)
 * other libraries included in "package.json" file
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-## Here's the steps how you can replicate this project
-
-1. Clone this project
-
-> git clone https://github.com/aldybw/CAMerlang-sql-rest-api
-
-2. Install some packages
-
-> npm install
-
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -64,21 +46,22 @@ _Below is an example of how you can instruct your audience on installing and set
    ```sh
    git clone https://github.com/aldybw/camerlang-sql-rest-api
    ```
-3. Install NPM packages
+2. Install NPM packages
    ```sh
    npm install
    ```
-5. Go to [Google Cloud Platform](https://console.cloud.google.com/)
-6. Go to search field and search for SQL service
-7. Create an Instance, and choose mySQL
-8. select MySQL 5.7 for Database version
-9. Click on "show configuration option and select "machine type"
-10. Click the drop down box and choose standard machine (1 vCPU, 3.75 GB)
-11. Storage type SSD and select the capacity 10GB. Don't forget to checklist "Enable automatic storage increases"
-12. Expand the connections setting, checklist on public IP then click add network, fill the network with "0.0.0.0/0", click done.
-13. And create Instance
-14. Open new terminal (shell or Bash), make sure your project location to "/CAMerlang-sql-rest-api"
-15. Open ".env" file and change to your configuration
+3. Go to [Google Cloud Platform](https://console.cloud.google.com/)
+4. Go to search field and search for SQL service
+5. Create an Instance, and choose mySQL
+6. select MySQL 5.7 for Database version
+7. Click on "show configuration option and select "machine type"
+8. Click the drop down box and choose standard machine (1 vCPU, 3.75 GB)
+9. Storage type SSD and select the capacity 10GB. Don't forget to checklist "Enable automatic storage increases"
+10. Expand the connections setting, checklist on public IP then click add network, fill the network with "0.0.0.0/0", click done.
+11. And create Instance
+12. Open new terminal (shell or Bash), make sure your project location to "/CAMerlang-sql-rest-api"
+13. Open ".env" file and change to your configuration
+
     >> #PRODUCTION<br>
     >> DB_PORT=3306 (Your DB port)<br>
     >> DB_NAME=camerlang_db (Your DB name)<br>
@@ -99,9 +82,9 @@ _Below is an example of how you can instruct your audience on installing and set
     >> DB_PORT=3306 (your DB port)
 
 15. Run the command below:
-   ```sh
-   ./deploy.sh
-   ```
+    ```sh
+    ./deploy.sh
+    ```
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- LICENSE -->
