@@ -1,11 +1,12 @@
 # CAMerlang-sql-rest-api
 ## Welcome to CAMerlang-sql-rest-api
-<div id="top"></div>
-![3](https://user-images.githubusercontent.com/86178738/168820192-342b7f6d-0572-48f8-84b7-5e95b0dcf200.png)
+<p align="center"> <img src="https://user-images.githubusercontent.com/86178738/171544543-61170e4e-dc04-4369-98ab-2ccc89c63017.png" width="150" height="150" /> </p>
 
-An quick &amp; efficient skin detection, diagnosis, and consultation application for Android.
-
-Currently in development. Stay tuned in this repository for more information.
+<div align="center">
+  <p align="center">
+    <a href="https://github.com/aldybw/CAMerlang-sql-rest-api"><strong>Back to the main repository</strong></a>
+  </p>
+</div>
 
 ## Here's the steps how you can replicate this project
 
