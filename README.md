@@ -8,6 +8,24 @@
   </p>
 </div>
 
+## What is this repository about?
+
+Hello and welcome to CAMerlang-sql-rest-api project repository for the cloud computing! 
+
+As the we mentioned before, this repository is used as the primary working repository for cloud computing side of the CAMerlang project done as part of Bangkit 2022's Product-based Capstone Project built in Node JS with Express JS.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+### This application built with
+
+A. Framework/Libraries
+* [Express JS](https://expressjs.com/)
+* [Sequelize](https://sequelize.org/)
+* other libraries included in "package.json" file
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 ## Here's the steps how you can replicate this project
 
 1. Clone this project
@@ -61,25 +79,24 @@ _Below is an example of how you can instruct your audience on installing and set
 13. And create Instance
 14. Open new terminal (shell or Bash), make sure your project location to "/CAMerlang-sql-rest-api"
 15. Open ".env" file and change to your configuration
-
-#PRODUCTION<br>
-DB_PORT=3306 (Your DB port)<br>
-DB_NAME=camerlang_db (Your DB name)<br>
-DB_USERNAME=root (Your DB username)<br>
-DB_PASSWORD=qwerty123 (Your DB pass)<br>
-DB_HOSTNAME=35.226.234.192 (Your SQL Public IP address)<br>
-INSTANCE_CONNECTION_NAME=35.226.234.192 (Your SQL Public IP address)
+    >> #PRODUCTION<br>
+    >> DB_PORT=3306 (Your DB port)<br>
+    >> DB_NAME=camerlang_db (Your DB name)<br>
+    >> DB_USERNAME=root (Your DB username)<br>
+    >> DB_PASSWORD=qwerty123 (Your DB pass)<br>
+    >> DB_HOSTNAME=35.226.234.192 (Your SQL Public IP address)<br>
+    >> INSTANCE_CONNECTION_NAME=35.226.234.192 (Your SQL Public IP address)
 
 14. Open "deploy.sh" file and change to your configuration
 
-GOOGLE_PROJECT_ID=camerlang-development (your project id)<br>
-CLOUD_RUN_SERVICE=camerlang-api-service (your service name)<br>
-INSTANCE_CONNECTION_NAME=camerlang-development:us-central1:camerlang-rest-api (your connection name)<br>
-DB_USERNAME=root (your DB username)<br>
-DB_PASSWORD=qwerty123 (your DB pass)<br>
-DB_NAME=camerlang_db (your DB name)<br>
-DB_HOSTNAME=35.226.234.192 (your SQL public IP address)<br>
-DB_PORT=3306 (your DB port)
+    >> GOOGLE_PROJECT_ID=camerlang-development (your project id)<br>
+    >> CLOUD_RUN_SERVICE=camerlang-api-service (your service name)<br>
+    >> INSTANCE_CONNECTION_NAME=camerlang-development:us-central1:camerlang-rest-api (your connection name)<br>
+    >> DB_USERNAME=root (your DB username)<br>
+    >> DB_PASSWORD=qwerty123 (your DB pass)<br>
+    >> DB_NAME=camerlang_db (your DB name)<br>
+    >> DB_HOSTNAME=35.226.234.192 (your SQL public IP address)<br>
+    >> DB_PORT=3306 (your DB port)
 
 15. Run the command below:
    ```sh
